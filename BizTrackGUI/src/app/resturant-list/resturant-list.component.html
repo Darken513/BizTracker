@@ -1,0 +1,10 @@
+<div class="container inner-container">
+    <ng-container *ngFor="let resturant of resturantsList">
+        <div>
+            <img [src]="resturant.img">
+            <h1>{{resturant.name}}</h1>
+            <p>{{resturant.location}}</p>
+            <p>{{resturant.description}}</p>
+        </div>
+    </ng-container>
+</div>
