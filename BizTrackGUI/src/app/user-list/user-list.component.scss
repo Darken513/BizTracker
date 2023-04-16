@@ -1,0 +1,33 @@
+.custom-card {
+    height: 130px;
+    padding-top: 10px;
+
+    .employeeCircle {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        vertical-align: top;
+        margin-right: 10px;
+        background-color: #27b793;
+        text-align: center;
+        font-size: 38px;
+        border-radius: 20px;
+        text-transform: capitalize;
+        padding: 0;
+    }
+    .employeeDetails{
+        display: inline-block;
+        width: calc(100% - 70px);
+    }
+
+    .custom-card-body .body-card-inner {
+        position: absolute;
+        height: 120px;
+        background-color: white;
+        border-radius: 20px;
+        width: 100%;
+        padding: 15px;
+        left: 0;
+        bottom: 0px;
+    }
+}
