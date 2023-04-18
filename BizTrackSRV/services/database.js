@@ -1,11 +1,46 @@
 exports.initDataBase = async (db) => {
     await exports.runSync(db, `
+        CREATE TABLE IF NOT EXISTS RESTAURANTS (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            address TEXT NOT NULL,
+            phone TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );`
+    )
+    await exports.runSync(db, `
         CREATE TABLE IF NOT EXISTS USERS (
             id INTEGER PRIMARY KEY,
             password TEXT NOT NULL,
             email TEXT NOT NULL UNIQUE,
-            username TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            username TEXT NOT NULL,
+            restaurantId INTEGER NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY(restaurantId) REFERENCES RESTAURANTS(id)
+        );`
+    )
+    await exports.runSync(db, `
+        CREATE TABLE IF NOT EXISTS BANKNOTESUMMARY (
+            id INTEGER PRIMARY KEY,
+            francJson TEXT NOT NULL,
+            totalTpe1 Real NOT NULL,
+            totalTpe2 Real NOT NULL,
+            totalWebsite Real NOT NULL,
+            totalAdvance Real NOT NULL,
+            Totals Real NOT NULL,
+            userId INTEGER NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY(userId) REFERENCES USERS(id)
+        );`
+    )
+    await exports.runSync(db, `
+        CREATE TABLE IF NOT EXISTS CHARGES (
+            id INTEGER PRIMARY KEY,
+            chargeLabel TEXT NOT NULL,
+            chargeValue Real NOT NULL,
+            bankNoteSummaryId INTEGER NOT NULL,
+            FOREIGN KEY(bankNoteSummuryId) REFERENCES BANKNOTESUMMARY(id)
         );`
     )
 };

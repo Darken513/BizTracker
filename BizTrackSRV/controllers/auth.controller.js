@@ -10,8 +10,6 @@ exports.login = async (req, res) => {
         id: user.id,
         email: user.email,
         username: user.username,
-        notif_time: user.notif_time,
-        design_mode: user.design_mode,
       },
       "BizTrackLongKeyHere!!"
     ); //make the key a general constant
