@@ -20,13 +20,16 @@ exports.login = async (req, res) => {
 };
 
 exports.signup = async (req, res) => {
-  const { email, password, username } = req.body;
-  const userExists = await userDB.getByEmail(email);
+  const userExists = await userDB.getByEmail(req.body.email);
   if (userExists) {
     res.json({ title: "Error", body: "Email already exists." });
     return;
   }
-  await userDB.createNew(password, email, username);
+  try {
+    await userDB.createNew(req.body);
+  } catch (error) {
+    console.log(error)
+  }
   res
     .status(201)
     .json({ title: "Success", body: "User created successfully." });

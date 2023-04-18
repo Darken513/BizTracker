@@ -13,6 +13,10 @@ body {
     width: 100%;
     font-family: 'Roboto', sans-serif;
     background:linear-gradient(#105a44, #1c4001);
+    background: url(https://c0.wallpaperflare.com/preview/839/412/980/food-and-drink-pizza-pizzas-tomato.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(10px);
     overflow: hidden;
 }
 
@@ -70,8 +74,8 @@ body {
     width: 100%;
     padding: 15px 50px;
     h1.title{
-        font-weight: 300;
-        color: yellowgreen;
+        font-weight: 500;
+        color: white;
         font-size: 2rem;
         text-align: center;
         text-transform: uppercase;

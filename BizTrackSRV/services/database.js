@@ -40,7 +40,7 @@ exports.initDataBase = async (db) => {
             chargeLabel TEXT NOT NULL,
             chargeValue Real NOT NULL,
             bankNoteSummaryId INTEGER NOT NULL,
-            FOREIGN KEY(bankNoteSummuryId) REFERENCES BANKNOTESUMMARY(id)
+            FOREIGN KEY(bankNoteSummaryId) REFERENCES BANKNOTESUMMARY(id)
         );`
     )
 };

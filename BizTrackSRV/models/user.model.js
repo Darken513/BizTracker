@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./database.db');
 const db_utils = require('../services/database')
 
-exports.createNew = async (password, email, username, restaurantId) => {
+exports.createNew = async ({password, email, username, restaurantId}) => {
     let hash = bcrypt.hashSync(password, saltRounds);
     try {
         return await db_utils.runSync(db, `INSERT INTO USERS (password, email, username, restaurantId) VALUES (?, ?, ?, ?)`, [hash, email, username, restaurantId]);
