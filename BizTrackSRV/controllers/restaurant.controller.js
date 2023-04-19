@@ -21,9 +21,11 @@ exports.getById = async (req, res) => {
 };
 
 exports.createNew = async (req, res) => {
-  console.log({...req.body});
-  const restaurant = await restaurantDB.createNew(req.body);
-  console.log(restaurant);
+  try {
+    await restaurantDB.createNew(req.body);
+  } catch (error) {
+    console.log(error)
+  } 
   res
     .status(201)
     .json({ title: "Success", body: "Restaurant created successfully." });
