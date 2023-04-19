@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { ResturantListComponent } from './resturant-list/resturant-list.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { BanknoteSummaryComponent } from './banknote-summary/banknote-summary.component';
+import { BilanComponent } from './bilan/bilan.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { BanknoteSummaryComponent } from './banknote-summary/banknote-summary.co
     LoginComponent,
     ResturantListComponent,
     UserListComponent,
-    BanknoteSummaryComponent
+    BanknoteSummaryComponent,
+    BilanComponent
   ],
   imports: [
     BrowserModule,
