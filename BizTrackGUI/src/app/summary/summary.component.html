@@ -1,0 +1,40 @@
+<div class="inner-container">
+    <div class="custom-card">
+        <div class="custom-card-body">
+            <div class="custom-card-header">
+                <div class="invoice-icon">
+                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                    <h1>Invoice</h1>
+                </div>
+                <div class="invoice-details">
+                    <h1>Resturant : </h1>
+                    <h2>Employee : </h2>
+                    <h2>Date&Time : </h2>
+                </div>
+            </div>
+            <div class="body-card-inner">
+                <div class="banknote-francs">
+                    <table style="margin-bottom: 10px;">
+                        <tr>
+                            <th>Currency</th>
+                            <th>number</th>
+                            <th>totalValue</th>
+                        </tr>
+                        <tr *ngFor="let banknote of banknotes">
+                            <td>{{banknote.label}}</td>
+                            <td>{{banknote.value}}</td>
+                            <td>{{banknote.value*banknote.nbr}} Fr</td>
+                        </tr>
+                        <tr style="position:relative; top: 10px;">
+                            <td></td>
+                            <td style="font-weight: 600;">Total Value</td>
+                            <td style="font-weight: 600;">{{getTotalBanknotes()}} Fr</td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>

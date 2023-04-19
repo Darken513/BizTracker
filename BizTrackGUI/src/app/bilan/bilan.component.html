@@ -9,16 +9,19 @@
                 </div>
             </div>
         </div>
-        <div class="custom-card">
+        <div class="custom-card" [ngStyle]="{'height':getChargesHeight()}">
             <div class="custom-card-body">
-                <div class="body-card-inner">
-                    <div *ngFor="let charge of charges">
+                <div class="body-card-inner" [ngStyle]="{'height':getChargesHeight()}">
+                    <h1>total charges : {{getTotalCharges()}}</h1>
+                    <div class="charge-wrapper" *ngFor="let charge of charges; let idx = index;">
+                        <button class="deleteCharge" (click)="deleteCharge(idx)"><i class="fa fa-times"></i></button>
                         <h1>{{charge.label}}</h1>
                         <input type="number" name="{{charge.fieldName+'_charge'}}" [(ngModel)]="charge.value">
                     </div>
-                    <div>
+                    <div class="newcharge-wrapper">
                         <input type="text" placeholder="Charge label" name="newCharge_label" [(ngModel)]="newCharge.label">
                         <input type="number" placeholder="Charge cost" name="newCharge_value" [(ngModel)]="newCharge.value">
+                        <button class="addCharge" (click)="addCharge()"><i class="fa fa-plus"></i></button>
                     </div>
                 </div>
             </div>
@@ -47,5 +50,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div>
+        <button class="btn-submit">Validate</button>
     </div>
 </div>

@@ -1,0 +1,75 @@
+.custom-card {
+    height: auto;
+    max-width: 750px;
+    margin: auto;
+    margin-bottom: 5px;
+
+    hr {
+        border: 1px solid black;
+        background: black;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .custom-card-header {
+        background: #2065a8;
+        color: white;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        padding: 35px;
+    }
+
+    .custom-card-body {
+        .body-card-inner {
+            position: static;
+            height: auto;
+            background-color: white;
+            border-radius: 20px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            width: 100%;
+            padding: 15px;
+        }
+
+        .banknote-francs {
+            table {
+                width: 100%;
+            }
+        }
+    }
+
+    .invoice-icon {
+        width: 30%;
+        vertical-align: top;
+        display: inline-block;
+
+        .fa-credit-card {
+            font-size: 5.5rem;
+            text-align: center;
+            display: block;
+        }
+    }
+
+    .invoice-details {
+        width: 70%;
+        vertical-align: top;
+        display: inline-block;
+
+        h1,
+        h2,
+        p {
+            text-align: end;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+        }
+    }
+}
