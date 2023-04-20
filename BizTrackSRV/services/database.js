@@ -5,6 +5,7 @@ exports.initDataBase = async (db) => {
             name TEXT NOT NULL,
             email TEXT NOT NULL UNIQUE,
             address TEXT NOT NULL,
+            img TEXT,
             phone TEXT NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );`

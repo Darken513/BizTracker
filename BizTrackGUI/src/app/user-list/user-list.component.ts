@@ -8,12 +8,12 @@ const colors = ['#b1f44caf', '#f19898af', '#69e5a9af', '#cfe569af', '#f98263af',
 })
 export class UserListComponent implements OnInit {
   employeesList: Array<any> = [
-    new Employee('Affes Achraf', "somewhere idk", '55411440'),
-    new Employee('Ahmed loukil', 'Rue Ibn Aljazzr, sfax', null),
-    new Employee('Foulen Fouleni', "somewhere idk", '55411440'),
-    new Employee('LBronze test', "somewhere idk", '55411440'),
-    new Employee('Morad mnif', 'Ave Habib Thameur, Sfax', '98564719'),
-    new Employee('Melek chaari', "somewhere idk", '55411440'),
+    new Employee(0,'Affes Achraf', "somewhere idk", '55411440'),
+    new Employee(1,'Ahmed loukil', 'Rue Ibn Aljazzr, sfax', null),
+    new Employee(2,'Foulen Fouleni', "somewhere idk", '55411440'),
+    new Employee(3,'LBronze test', "somewhere idk", '55411440'),
+    new Employee(4,'Morad mnif', 'Ave Habib Thameur, Sfax', '98564719'),
+    new Employee(5,'Melek chaari', "somewhere idk", '55411440'),
   ]
   constructor() { }
 
@@ -27,10 +27,12 @@ export class UserListComponent implements OnInit {
 }
 
 class Employee {
+  id: number;
   name: any;
   address: any;
   phoneNbr: any;
-  constructor(name: any, address: any, phoneNbr: any) {
+  constructor(id: number,name: any, address: any, phoneNbr: any) {
+    this.id = id;
     this.name = name;
     this.address = address;
     this.phoneNbr = phoneNbr;

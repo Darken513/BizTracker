@@ -2,7 +2,7 @@
     <h1 class="title">Select Current Establishment</h1>
     <div class="row">
         <ng-container *ngFor="let resturant of resturantsList">
-            <div class="custom-card col-lg-4 col-sm-6">
+            <div [routerLink]="['/employees', resturant.id]" class="custom-card col-lg-4 col-sm-6">
                 <div class="custom-card-body" [ngStyle]="{'background':'url('+resturant.img+')'}">
                     <div class="body-card-inner">
                         <h1>{{resturant.name}}</h1>

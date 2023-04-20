@@ -2,7 +2,7 @@
     <h1 class="title">Which Employee Are you ?</h1>
     <div class="row">
         <ng-container *ngFor="let employee of employeesList; let idx = index">
-            <div class="custom-card col-lg-4 col-sm-6">
+            <div [routerLink]="['/auth/login', employee.id]" class="custom-card col-lg-4 col-sm-6">
                 <div class="custom-card-body">
                     <div class="body-card-inner">
                         <div class="employeeCircle" [ngStyle]="{'backgroundColor':getColor(idx)}">{{employee.name[0]}}</div>

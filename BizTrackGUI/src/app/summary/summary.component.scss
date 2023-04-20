@@ -12,12 +12,18 @@
     h1 {
         text-align: center;
     }
-
     .custom-card-header {
         background: #2065a8;
         color: white;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
+        padding: 35px;
+    }
+    .custom-card-footer {
+        background: #6a96c1;
+        color: white;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
         padding: 35px;
     }
 
@@ -26,16 +32,23 @@
             position: static;
             height: auto;
             background-color: white;
-            border-radius: 20px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
+            border-radius: 0;
             width: 100%;
-            padding: 15px;
+            padding: 15px 35px;
         }
-
-        .banknote-francs {
-            table {
-                width: 100%;
+        table{
+            width: 100%;
+            td {
+                overflow-wrap: anywhere;
+            }
+            tr td:nth-child(1){
+                width: 45%;
+            }
+            tr td:nth-child(2){
+                width: 35%;
+            }
+            tr td:nth-child(3){
+                width: 15%;
             }
         }
     }
@@ -71,5 +84,26 @@
         h2 {
             font-size: 1.2rem;
         }
+    }
+}
+button.no-print {
+    background: #2065a8;
+    padding: 9px 10px;
+    margin: 1px;
+    border-radius: 10px;
+    border: none;
+    width: 230px;
+    color: white;
+    text-align: center;
+}
+@media print {
+    .no-print {
+      display: none;
+    }
+    .custom-card .custom-card-body{
+        box-shadow: none;
+        padding: 5px 35px;
+        box-sizing: border-box;
+        border: 1px solid black;
     }
 }
