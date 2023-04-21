@@ -2,14 +2,16 @@ const jwt = require("jsonwebtoken");
 const userDB = require("../models/user.model");
 
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
-  const user = await userDB.getByEmailAndPassword(email, password);
+  const { username, password } = req.body;
+  const user = await userDB.getByUsernameAndPassword(username, password);
   if (user) {
     const token = jwt.sign(
       {
         id: user.id,
-        email: user.email,
         username: user.username,
+        email: user.email,
+        phone: user.phone,
+        address: user.address,
       },
       "BizTrackLongKeyHere!!"
     ); //make the key a general constant
@@ -20,9 +22,14 @@ exports.login = async (req, res) => {
 };
 
 exports.signup = async (req, res) => {
-  const userExists = await userDB.getByEmail(req.body.email);
-  if (userExists) {
+  const emailExists = await userDB.getByEmail(req.body.email);
+  const usernameExists = await userDB.getByUsername(req.body.username);
+  if (emailExists) {
     res.json({ title: "Error", body: "Email already exists." });
+    return;
+  }
+  if (usernameExists) {
+    res.json({ title: "Error", body: "Username already exists." });
     return;
   }
   try {

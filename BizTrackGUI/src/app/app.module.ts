@@ -5,18 +5,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { ResturantListComponent } from './resturant-list/resturant-list.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { BanknoteSummaryComponent } from './banknote-summary/banknote-summary.component';
-import { BilanComponent } from './bilan/bilan.component';
-import { SummaryComponent } from './summary/summary.component';
+import { LoginComponent } from './components/login/login.component';
+import { RestaurantListComponent } from './components/restaurant-list/restaurant-list.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { BanknoteSummaryComponent } from './components/banknote-summary/banknote-summary.component';
+import { BilanComponent } from './components/bilan/bilan.component';
+import { SummaryComponent } from './components/summary/summary.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ResturantListComponent,
+    RestaurantListComponent,
     UserListComponent,
     BanknoteSummaryComponent,
     BilanComponent,

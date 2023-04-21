@@ -99,7 +99,7 @@ body {
 
         .body-card-inner {
             position: absolute;
-            height: 120px;
+            height: 130px;
             background-color: white;
             border-radius: 20px;
             width: calc(100% - 30px);
@@ -126,4 +126,14 @@ body {
         }
     }
 
+}
+
+@keyframes slideinTop {
+    from {
+        top: -150px;
+    }
+
+    to {
+        top: 20px;
+    }
 }

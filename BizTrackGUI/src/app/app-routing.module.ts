@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { ResturantListComponent } from './resturant-list/resturant-list.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { BanknoteSummaryComponent } from './banknote-summary/banknote-summary.component';
-import { BilanComponent } from './bilan/bilan.component';
-import { SummaryComponent } from './summary/summary.component';
+import { LoginComponent } from './components/login/login.component';
+import { RestaurantListComponent } from './components/restaurant-list/restaurant-list.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { BanknoteSummaryComponent } from './components/banknote-summary/banknote-summary.component';
+import { BilanComponent } from './components/bilan/bilan.component';
+import { SummaryComponent } from './components/summary/summary.component';
 
 /*
 const routes: Routes = [
@@ -22,12 +22,12 @@ const routes: Routes = [
 */
 
 const routes: Routes = [
-  { path: 'home', component: ResturantListComponent },
-  { path: 'employees/:res_id', component: UserListComponent },
+  { path: 'home', component: RestaurantListComponent },
+  { path: 'employees/:id', component: UserListComponent },
   { path: 'banknoteSum', component: BanknoteSummaryComponent },
   { path: 'bilan', component: BilanComponent },
   { path: 'summary', component: SummaryComponent },
-  { path: 'auth/login/:user_id', component: LoginComponent,/*  canActivate: [AuthGuard] */ },
+  { path: 'auth/login/:resid/:username', component: LoginComponent,/*  canActivate: [AuthGuard] */ },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];

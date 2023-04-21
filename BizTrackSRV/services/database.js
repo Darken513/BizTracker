@@ -15,7 +15,9 @@ exports.initDataBase = async (db) => {
             id INTEGER PRIMARY KEY,
             password TEXT NOT NULL,
             email TEXT NOT NULL UNIQUE,
-            username TEXT NOT NULL,
+            username TEXT NOT NULL UNIQUE,
+            address TEXT,
+            phone TEXT,
             restaurantId INTEGER NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY(restaurantId) REFERENCES RESTAURANTS(id)

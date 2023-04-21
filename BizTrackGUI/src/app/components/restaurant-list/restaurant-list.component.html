@@ -1,0 +1,21 @@
+<div class="inner-container">
+    <h1 class="title">Select Current Establishment</h1>
+    <div class="row">
+        <ng-container *ngFor="let restaurant of restaurantsList">
+            <div [routerLink]="['/employees', restaurant.id]" class="custom-card col-lg-4 col-sm-6">
+                <div class="custom-card-body"
+                    [ngStyle]="{'background':'url(' + (restaurant.img ? restaurant.img : defaultImgPath )+ ')'}">
+                    <div class="body-card-inner">
+                        <h1>{{restaurant.name}}</h1>
+                        <p *ngIf="restaurant.address" class="address"><i class="fa fa-map-marker"
+                                aria-hidden="true"></i> {{restaurant.address}}</p>
+                        <p *ngIf="restaurant.email" class="email"><i class="fa fa-email" aria-hidden="true"></i>
+                            {{restaurant.email}}</p>
+                        <p *ngIf="restaurant.phone" class="phone"><i class="fa fa-phone" aria-hidden="true"></i>
+                            {{restaurant.phone}}</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

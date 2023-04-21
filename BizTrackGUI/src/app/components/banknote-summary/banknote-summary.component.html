@@ -1,0 +1,35 @@
+<div class="inner-container">
+    <h1 class="title">Deposit Funds in the cash register</h1>
+    <div class="row">
+        <ng-container *ngFor="let currency of currencies">
+            <div class="custom-card col-lg-4 col-sm-6">
+                <div class="custom-card-body">
+                    <div class="body-card-inner">
+                        <div class="currencyPic-wrapper">
+                            <img class="currencyPic" [src]="currency.img" alt="">
+                        </div>
+                        <div class="currencuDetails">
+                            <h1>{{currency.value}} franc</h1>
+                            <div class="input-wrapper">
+                                <button (click)="reduceCurrency(currency)">-</button>
+                                <input placeholder="{{0}}" type="number" min="0" (input)="preventNegative($event, currency)" [(ngModel)]="currency.nbr">
+                                <button (click)="increaseCurrency(currency)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div>
+        <div class="custom-card card-total">
+            <div class="custom-card-body">
+                <div class="body-card-inner">
+                    <h1>Total Cash</h1>
+                    <h1>{{getTotalValue()}} Fr</h1>
+                </div>
+            </div>
+        </div>
+        <button class="btn-submit">Validate</button>
+    </div>
+</div>

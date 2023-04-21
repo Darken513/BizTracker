@@ -1,0 +1,21 @@
+<div class="inner-container">
+    <h1 class="title">Which Employee Are you ?</h1>
+    <div class="row">
+        <ng-container *ngFor="let employee of employeesList; let idx = index">
+            <div [routerLink]="['/auth/login', resId ,employee.username]" class="custom-card col-lg-4 col-sm-6">
+                <div class="custom-card-body">
+                    <div class="body-card-inner">
+                        <div class="employeeCircle" [ngStyle]="{'backgroundColor':getColor(idx)}">{{employee.username[0]}}</div>
+                        <div class="employeeDetails">
+                            <h1 [ngStyle]="{'backgroundColor':getColor(idx)}">{{employee.username}}</h1>
+                            <p class="address"><i class="fa fa-map-marker"
+                                    aria-hidden="true"></i> {{employee.address ? employee.address : 'Unkown'}}</p>
+                            <p class="phoneNbr"><i class="fa fa-phone" aria-hidden="true"></i>
+                                {{employee.phoneNbr ? employee.phoneNbr : 'Unkown'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="inner-container">
+    <div class="custom-card">
+        <div class="custom-card-body">
+            <div class="custom-card-header">
+                <div class="invoice-icon">
+                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                    <h1>Invoice</h1>
+                </div>
+                <div class="invoice-details">
+                    <h1>Restaurant : </h1>
+                    <h2>Employee : </h2>
+                    <h2>Date&Time : </h2>
+                </div>
+            </div>
+            <div class="body-card-inner">
+                <div class="banknote-francs">
+                    <table style="margin-bottom: 10px;">
+                        <tr>
+                            <th>Currency</th>
+                            <th>number</th>
+                            <th>totalValue</th>
+                        </tr>
+                        <tr *ngFor="let banknote of banknotes">
+                            <td>{{banknote.label}}</td>
+                            <td>{{banknote.value}}</td>
+                            <td>{{banknote.value*banknote.nbr}} Fr</td>
+                        </tr>
+                        <tr style="position:relative; top: 10px;">
+                            <td></td>
+                            <td style="font-weight: 600;">Total Value</td>
+                            <td style="font-weight: 600;">{{getTotalBanknotes()}} Fr</td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <div class="totals-wrapper">
+                    <table>
+                        <tr *ngFor="let total of fields">
+                            <td>{{total.label}}</td>
+                            <td></td>
+                            <td>{{total.value}} Fr</td>
+                        </tr>
+                        <tr style="background-color: #2065a810;">
+                            <td style="font-weight: 600;">Total charges</td>
+                            <td></td>
+                            <td style="font-weight: 600;">{{getTotalCharges()}} Fr</td>
+                        </tr>
+                        <tr style="background-color: #eeeeee50;" *ngFor="let charge of charges">
+                            <td></td>
+                            <td>{{charge.label}}</td>
+                            <td>{{charge.value}} Fr</td>
+                        </tr>
+                        <tr style="background-color: #ffd2d250;">
+                            <td>{{advance.label}}</td>
+                            <td></td>
+                            <td>{{advance.value}} Fr</td>
+                        </tr>
+                        <tr style="position:relative; top: 10px;">
+                            <td></td>
+                            <td style="font-weight: 600;">Total Income</td>
+                            <td style="font-weight: 600;">{{getTotalIncome()}} Fr</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+        <div class="custom-card-footer">
+            <div class="invoice-icon">
+                <button class="no-print" (click)="printPage()">Click here to print it</button>
+                <button class="no-print" (click)="sendItByMail()">Click here to send it by e-mail</button>
+            </div>
+            <div class="invoice-details">
+                <h2><i style="margin-right: 10px;" class="fa fa-money" aria-hidden="true"> </i> TOTAL</h2>
+                <h1>00000.00 Fr</h1>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

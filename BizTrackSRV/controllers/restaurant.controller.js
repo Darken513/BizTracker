@@ -2,7 +2,6 @@ const restaurantDB = require("../models/restaurant.model");
 
 exports.getAll = async (req, res) => {
   const restaurants = await restaurantDB.getAll();
-  console.log(restaurants);
   if (restaurants) {
     res.json({restaurants});
   } else {
