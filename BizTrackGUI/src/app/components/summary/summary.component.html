@@ -7,9 +7,10 @@
                     <h1>Invoice</h1>
                 </div>
                 <div class="invoice-details">
-                    <h1>Restaurant : </h1>
-                    <h2>Employee : </h2>
-                    <h2>Date&Time : </h2>
+                    <h1>Restaurant : {{restaurant?restaurant.name:''}} </h1>
+                    <h2>Address : {{restaurant?restaurant.address:''}}</h2>
+                    <h2>Employee : {{username}}</h2>
+                    <h2>Date&Time : {{dateTime}}</h2>
                 </div>
             </div>
             <div class="body-card-inner">
@@ -22,7 +23,7 @@
                         </tr>
                         <tr *ngFor="let banknote of banknotes">
                             <td>{{banknote.label}}</td>
-                            <td>{{banknote.value}}</td>
+                            <td>{{banknote.nbr?banknote.nbr:'-'}}</td>
                             <td>{{banknote.value*banknote.nbr}} Fr</td>
                         </tr>
                         <tr style="position:relative; top: 10px;">
@@ -66,12 +67,12 @@
             
         <div class="custom-card-footer">
             <div class="invoice-icon">
-                <button class="no-print" (click)="printPage()">Click here to print it</button>
-                <button class="no-print" (click)="sendItByMail()">Click here to send it by e-mail</button>
+                <button class="no-print" (click)="printPage()">Click here to print report</button>
+                <button class="no-print" (click)="SaveConf()">Click here to save report</button>
             </div>
             <div class="invoice-details">
                 <h2><i style="margin-right: 10px;" class="fa fa-money" aria-hidden="true"> </i> TOTAL</h2>
-                <h1>00000.00 Fr</h1>
+                <h1>{{getTotalIncome()}} Fr</h1>
             </div>
         </div>
         </div>

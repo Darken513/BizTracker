@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  resId:number = -1;
+  resId: number = -1;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,14 +48,14 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.value.password;
 
     this.authService.login(username, password).subscribe({
-      next: (response:any) => {
+      next: (response: any) => {
         if (response.title && response.body) {
           this.notifService.showNotification(response.title, response.body)
         } else if (response.token) {
           this.authService.setToken(response.token)
         }
       },
-      error: (error:any) => {
+      error: (error: any) => {
         console.log(error)
       }
     });

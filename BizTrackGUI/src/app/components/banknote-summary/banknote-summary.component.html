@@ -12,7 +12,7 @@
                             <h1>{{currency.value}} franc</h1>
                             <div class="input-wrapper">
                                 <button (click)="reduceCurrency(currency)">-</button>
-                                <input placeholder="{{0}}" type="number" min="0" (input)="preventNegative($event, currency)" [(ngModel)]="currency.nbr">
+                                <input placeholder="{{0}}" type="number" min="0" (keypress)="onKeyPress($event)" [(ngModel)]="currency.nbr">
                                 <button (click)="increaseCurrency(currency)">+</button>
                             </div>
                         </div>
@@ -30,6 +30,7 @@
                 </div>
             </div>
         </div>
-        <button class="btn-submit">Validate</button>
+        <button class="btn-submit" (click)="submit()">Next <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </button>
     </div>
 </div>

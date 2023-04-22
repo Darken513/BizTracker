@@ -18,16 +18,21 @@ export class AuthService {
   public login(username: string, password: string): Observable<any> {
     return this.http.post<{ response: any }>(`${this.apiUrl}/login`, { username, password });
   }
-  
-  public setToken(token: string, dontNav?:boolean): void {
+
+  public setToken(token: string, dontNav?: boolean): void {
     localStorage.setItem('token', token);
-    if(dontNav) return;
-    this.router.navigateByUrl('/banknoteSum');
+    if (dontNav) return;
+    this.router.navigateByUrl('/summary');
   }
 
   public logout(): void {
     localStorage.removeItem('token');
     this.router.navigateByUrl('/auth/login');
+  }
+
+  public getToken(): any {
+    const token = localStorage.getItem('token');
+    return token;
   }
 
   public getCurrentUser(): any {
@@ -39,7 +44,7 @@ export class AuthService {
     return null;
   }
 
-  signUp(email: string, password: string, username:string): Observable<any> {
+  signUp(email: string, password: string, username: string): Observable<any> {
     const body = { email, password, username };
     return this.http.post<any>(`${this.apiUrl}/signup`, body);
   }

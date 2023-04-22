@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-banknote-summary',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./banknote-summary.component.scss']
 })
 export class BanknoteSummaryComponent implements OnInit {
+  @Output() onSubmit = new EventEmitter<any>();
   currencies: Array<Currency> = [
     new Currency('../../assets/05franc.png', 0.5, ''),
     new Currency('../../assets/1franc.png', 1, ''),
@@ -37,13 +38,18 @@ export class BanknoteSummaryComponent implements OnInit {
     const currentNbr = parseInt(currency.nbr ? currency.nbr : 0);
     currency.nbr = (currentNbr + 1).toString()
   }
-  preventNegative(event: any, currency: any) {
-    console.log(event.srcElement.value)
-    if (event.srcElement.value.length || event.srcElement.value < 0 || event.srcElement.value.includes('.'))
-      currency.nbr = '';
+  onKeyPress(event: any) {
+    const pattern = /[0-9]/;
+    const inputChar = String.fromCharCode(event.charCode);
+    if (!pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
-
+  submit() {
+    this.onSubmit.emit(this.currencies);
+  }
 }
+
 class Currency {
   img: string;
   value: number;
@@ -52,5 +58,8 @@ class Currency {
     this.img = img;
     this.value = value;
     this.nbr = nbr;
+  }
+  copy(nbr: string) {
+    return new Currency(this.img, this.value, nbr)
   }
 }

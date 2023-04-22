@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-bilan',
@@ -6,33 +6,40 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bilan.component.scss']
 })
 export class BilanComponent implements OnInit {
+  @Output() onSubmit = new EventEmitter<any>();
   website: FieldToFill = new FieldToFill('totalWebsite', "Total income from websites", 0);
   advance: FieldToFill = new FieldToFill('advance', "Total advance", 0);
   tpe1: FieldToFill = new FieldToFill('totalTpe1', "Total income from TPE1", 0);
   tpe2: FieldToFill = new FieldToFill('totalTpe2', "Total income from TPE2", 0);
   fields: Array<FieldToFill> = [this.website, this.advance, this.tpe1, this.tpe2]
-  charges: Array<any> = [{label:"test",value:0}, {label:"label2",value:0}]//new Array();
-  newCharge:any = {label:"",value:0}
-  constructor() { }
+  charges: Array<any> = [];
+  newCharge: any = { label: "", value: 0 }
+  constructor(
+  ) { }
 
   ngOnInit(): void {
   }
-  getChargesHeight(){
-    return this.charges.length*40+120+'px'
+  getChargesHeight() {
+    return this.charges.length * 40 + 120 + 'px'
   }
-  getTotalCharges(){
-    return this.charges.reduce((res, curr)=>res+curr.value, 0)+' Fr'
+  getTotalCharges() {
+    return this.charges.reduce((res, curr) => res + curr.value, 0) + ' Fr'
   }
-  addCharge(){
-    if(!this.newCharge.label && !this.newCharge.value){
+  addCharge() {
+    if (!this.newCharge.label && !this.newCharge.value) {
       //display error
       return;
     }
     this.charges.push(this.newCharge);
-    this.newCharge = {label:"",value:0};
+    this.newCharge = { label: "", value: 0 };
   }
-  deleteCharge(idx:number){
+  deleteCharge(idx: number) {
     this.charges.splice(idx, 1)
+  }
+  submit(){
+    this.onSubmit.emit({
+      fields:this.fields, charges:this.charges
+    })
   }
 }
 

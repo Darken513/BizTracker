@@ -12,6 +12,7 @@ exports.login = async (req, res) => {
         email: user.email,
         phone: user.phone,
         address: user.address,
+        restaurantId: user.restaurantId,
       },
       "BizTrackLongKeyHere!!"
     ); //make the key a general constant

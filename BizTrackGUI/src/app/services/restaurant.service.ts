@@ -15,4 +15,7 @@ export class RestaurantService {
   getAll(): Observable<any> {
     return this.http.get<{ response: any }>(`${this.apiUrl}/getAll`);
   }
+  getById(id:number): Observable<any> {
+    return this.http.get<{ response: any }>(`${this.apiUrl}/get/${id}`);
+  }
 }

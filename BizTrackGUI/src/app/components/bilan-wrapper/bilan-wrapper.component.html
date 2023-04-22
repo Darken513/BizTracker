@@ -1,0 +1,3 @@
+<app-banknote-summary *ngIf="!banknotes" (onSubmit)="banknotes=$event"></app-banknote-summary>
+<app-bilan *ngIf="banknotes && !bilanObj" (onSubmit)="bilanObj=$event"></app-bilan>
+<app-summary *ngIf="banknotes && bilanObj" [bilanObj]="bilanObj" [banknotesObj]="banknotes"></app-summary>
