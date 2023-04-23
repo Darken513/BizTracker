@@ -36,6 +36,11 @@
                 <hr>
                 <div class="totals-wrapper">
                     <table>
+                        <tr>
+                            <td>Total Deposed Funds</td>
+                            <td></td>
+                            <td>{{getTotalBanknotes()}} Fr</td>
+                        </tr>
                         <tr *ngFor="let total of fields">
                             <td>{{total.label}}</td>
                             <td></td>

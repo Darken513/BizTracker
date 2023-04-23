@@ -60,7 +60,7 @@ export class SummaryComponent implements OnInit {
     return this.bilanObj.charges.reduce((res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'), 0);
   }
   getTotalIncome() {
-    return this.fields.reduce((res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'), 0) -
+    return this.getTotalBanknotes() + this.fields.reduce((res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'), 0) -
       this.bilanObj.charges.reduce((res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'), 0) -
       parseInt(this.advance.value ? this.advance.value : '0');
   }

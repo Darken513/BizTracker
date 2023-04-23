@@ -27,7 +27,7 @@ async function init() {
 }
 
 init();
-app.listen(80, () => console.log('Server started on port 80'));
+app.listen(process.env.port ? process.env.port : 80, () => console.log('Server started on port 80'));
 process.on('uncaughtException', (error) => {
   console.error('Error: ', error);
 });
