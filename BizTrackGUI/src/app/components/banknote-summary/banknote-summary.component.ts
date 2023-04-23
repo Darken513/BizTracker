@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Currency } from 'src/app/Models/Currency';
 
 @Component({
   selector: 'app-banknote-summary',
@@ -7,24 +8,15 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class BanknoteSummaryComponent implements OnInit {
   @Output() onSubmit = new EventEmitter<any>();
-  currencies: Array<Currency> = [
-    new Currency('../../assets/05franc.png', 0.5, ''),
-    new Currency('../../assets/1franc.png', 1, ''),
-    new Currency('../../assets/2franc.png', 2, ''),
-    new Currency('../../assets/5franc.png', 5, ''),
-    new Currency('../../assets/10franc.png', 10, ''),
-    new Currency('../../assets/20franc.png', 20, ''),
-    new Currency('../../assets/50franc.png', 50, ''),
-    new Currency('../../assets/100franc.png', 100, ''),
-    new Currency('../../assets/200franc.png', 200, '')
-  ];
+  @Input() banknotes:Array<Currency> = [];
+  
   constructor() { }
 
   ngOnInit(): void {
   }
 
   getTotalValue() {
-    return this.currencies.reduce((toret: number, curr: Currency) => {
+    return this.banknotes.reduce((toret: number, curr: Currency) => {
       toret += curr.value * parseInt(curr.nbr ? curr.nbr : '0');
       return toret;
     }, 0)
@@ -46,20 +38,6 @@ export class BanknoteSummaryComponent implements OnInit {
     }
   }
   submit() {
-    this.onSubmit.emit(this.currencies);
-  }
-}
-
-class Currency {
-  img: string;
-  value: number;
-  nbr: string;
-  constructor(img: string, value: number, nbr: string) {
-    this.img = img;
-    this.value = value;
-    this.nbr = nbr;
-  }
-  copy(nbr: string) {
-    return new Currency(this.img, this.value, nbr)
+    this.onSubmit.emit(true);
   }
 }

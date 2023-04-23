@@ -15,6 +15,9 @@ import { LoadingInterceptor } from './loading.interceptor';
 import { JwtInterceptor } from './jwt.interceptor';
 import { AuthGuard } from './auth.guard';
 import { BilanWrapperComponent } from './components/bilan-wrapper/bilan-wrapper.component';
+import { NotSignedInGuard } from './notSignedIn.guard';
+import { CashRegisterHandlerComponent } from './components/cash-register-handler/cash-register-handler.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import { BilanWrapperComponent } from './components/bilan-wrapper/bilan-wrapper.
     BilanComponent,
     SummaryComponent,
     BilanWrapperComponent,
+    CashRegisterHandlerComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,8 @@ import { BilanWrapperComponent } from './components/bilan-wrapper/bilan-wrapper.
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    AuthGuard
+    AuthGuard,
+    NotSignedInGuard
   ],
   bootstrap: [AppComponent]
 })

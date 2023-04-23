@@ -12,6 +12,7 @@
     h1 {
         text-align: center;
     }
+
     .custom-card-header {
         background: #2065a8;
         color: white;
@@ -19,6 +20,7 @@
         border-top-right-radius: 20px;
         padding: 35px;
     }
+
     .custom-card-footer {
         background: #6a96c1;
         color: white;
@@ -34,20 +36,25 @@
             background-color: white;
             border-radius: 0;
             width: 100%;
-            padding: 15px 35px;
+            padding: 25px 35px;
         }
-        table{
+
+        table {
             width: 100%;
+
             td {
                 overflow-wrap: anywhere;
             }
-            tr td:nth-child(1){
+
+            tr td:nth-child(1) {
                 width: 45%;
             }
-            tr td:nth-child(2){
+
+            tr td:nth-child(2) {
                 width: 35%;
             }
-            tr td:nth-child(3){
+
+            tr td:nth-child(3) {
                 width: 15%;
             }
         }
@@ -86,6 +93,7 @@
         }
     }
 }
+
 button.no-print {
     background: #2065a8;
     padding: 9px 10px;
@@ -96,14 +104,29 @@ button.no-print {
     color: white;
     text-align: center;
 }
+
+button.saveconf {
+    background: #5ba820;
+}
+
 @media print {
     .no-print {
-      display: none;
+        display: none;
     }
-    .custom-card .custom-card-body{
+
+    .custom-card .custom-card-body {
         box-shadow: none;
-        padding: 5px 35px;
+        padding: 0 35px;
         box-sizing: border-box;
         border: 1px solid black;
+    }
+
+    .custom-card-footer {
+        padding-top: 5px !important;
+        padding-bottom: 10px !important;
+    }
+
+    .custom-card-header {
+        padding-bottom: 0 !important;
     }
 }

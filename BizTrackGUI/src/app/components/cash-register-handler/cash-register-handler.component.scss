@@ -1,0 +1,56 @@
+.custom-card {
+    .custom-card-body {
+        table {
+
+            tr,
+            td,
+            th {
+                padding: 3px 7px;
+            }
+
+            width: 100%;
+
+            tr:first-of-type {
+                background-color: #adcfad;
+            }
+
+            tr:nth-of-type(2n+2) {
+                background-color: #bf8d7c33;
+            }
+
+            td {
+                overflow-wrap: anywhere;
+            }
+
+            tr td:nth-child(1) {
+                width: auto;
+            }
+
+            tr td:nth-child(2) {
+                width: auto;
+            }
+
+            tr td:nth-child(3) {
+                width: auto;
+            }
+        }
+    }
+}
+
+
+.invoice-icon {
+    width: 100% !important;
+
+    button {
+        margin: auto;
+        display: block;
+        background-color: #2065a8;
+    }
+}
+
+.custom-card .custom-card-footer{
+    padding: 15px;
+}
+.custom-card .custom-card-header{
+    padding: 20px 50px 15px 50px;
+}

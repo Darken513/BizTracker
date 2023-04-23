@@ -1,3 +1,12 @@
-<app-banknote-summary *ngIf="!banknotes" (onSubmit)="banknotes=$event"></app-banknote-summary>
-<app-bilan *ngIf="banknotes && !bilanObj" (onSubmit)="bilanObj=$event"></app-bilan>
-<app-summary *ngIf="banknotes && bilanObj" [bilanObj]="bilanObj" [banknotesObj]="banknotes"></app-summary>
+<div class="wrapper-container">
+    <div class="header-div no-print">
+        <button *ngIf="page_idx" (click)="page_idx=page_idx-1" class="navigationBtn left"><i class="fa fa-arrow-left"></i></button>
+        <h1 (click)="logout()"><i class="fa fa-user"></i> Affes Achraf</h1>
+    </div>
+    <div class="wrapper-body">
+        <app-banknote-summary *ngIf="page_idx==0" [banknotes]="banknotes" (onSubmit)="page_idx=1"></app-banknote-summary>
+        <app-bilan *ngIf="page_idx==1" [bilanObj]="bilanObj" (onSubmit)="page_idx=2"></app-bilan>
+        <app-summary *ngIf="page_idx==2" [bilanObj]="bilanObj" [banknotesObj]="banknotes" (onSubmit)="page_idx=3"></app-summary>
+        <app-cash-register-handler *ngIf="page_idx==3"></app-cash-register-handler>
+    </div>
+</div>

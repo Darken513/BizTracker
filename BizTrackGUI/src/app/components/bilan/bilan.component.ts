@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FieldToFill } from 'src/app/Models/FieldToFill';
 
 @Component({
   selector: 'app-bilan',
@@ -7,49 +8,51 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class BilanComponent implements OnInit {
   @Output() onSubmit = new EventEmitter<any>();
-  website: FieldToFill = new FieldToFill('totalWebsite', "Total income from websites", 0);
-  advance: FieldToFill = new FieldToFill('advance', "Total advance", 0);
-  tpe1: FieldToFill = new FieldToFill('totalTpe1', "Total income from TPE1", 0);
-  tpe2: FieldToFill = new FieldToFill('totalTpe2', "Total income from TPE2", 0);
-  fields: Array<FieldToFill> = [this.website, this.advance, this.tpe1, this.tpe2]
-  charges: Array<any> = [];
-  newCharge: any = { label: "", value: 0 }
+  private _bilanObj: any;
+  fields: Array<FieldToFill> = []
+
+  @Input()
+  public set bilanObj(v: any) {
+    this._bilanObj = v;
+    this.fields = [v.website, v.advance, v.tpe1, v.tpe2];
+  }
+
+  public get bilanObj(): any {
+    return this._bilanObj;
+  }
+
+
+  newCharge: any = { label: "", value: '' }
   constructor(
   ) { }
 
   ngOnInit(): void {
   }
   getChargesHeight() {
-    return this.charges.length * 40 + 120 + 'px'
+    return this.bilanObj.charges.length * 40 + 120 + 'px'
   }
   getTotalCharges() {
-    return this.charges.reduce((res, curr) => res + curr.value, 0) + ' Fr'
+    return this.bilanObj.charges.reduce((res: any, curr: any) => res + parseFloat(curr.value ? curr.value : '0'), 0) + ' Fr'
   }
   addCharge() {
-    if (!this.newCharge.label && !this.newCharge.value) {
+    if (!this.newCharge.label && !parseFloat(this.newCharge.value ? this.newCharge.value : '0')) {
       //display error
       return;
     }
-    this.charges.push(this.newCharge);
-    this.newCharge = { label: "", value: 0 };
+    this.bilanObj.charges.push(this.newCharge);
+    this.newCharge = { label: "", value: '' };
   }
   deleteCharge(idx: number) {
-    this.charges.splice(idx, 1)
+    this.bilanObj.charges.splice(idx, 1)
   }
-  submit(){
-    this.onSubmit.emit({
-      fields:this.fields, charges:this.charges
-    })
+  submit() {
+    this.onSubmit.emit(true)
   }
-}
-
-class FieldToFill {
-  fieldName: string;
-  label: string;
-  value: number;
-  constructor(fieldName: string, label: string, value: number) {
-    this.fieldName = fieldName;
-    this.label = label;
-    this.value = value;
+  onKeyPress(event: any) {
+    const pattern = /[0-9]/;
+    const inputChar = String.fromCharCode(event.charCode);
+    if (!pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
 }

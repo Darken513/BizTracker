@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Currency } from 'src/app/Models/Currency';
+import { FieldToFill } from 'src/app/Models/FieldToFill';
 import { AuthService } from 'src/app/services/auth.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 
@@ -8,36 +10,24 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
   styleUrls: ['./summary.component.scss']
 })
 export class SummaryComponent implements OnInit {
+  @Output() onSubmit = new EventEmitter<any>();
   dateTime: string = "";
   username: string = "";
   restaurant: any;
+  @Input() banknotesObj: Array<Currency> = [];
+  private _bilanObj: any;
   @Input()
-  set banknotesObj(value: Array<any>) {
-    this.banknotes.forEach((bNote) => { bNote.nbr = value.find((curr) => curr.value == bNote.value).nbr });
+  public set bilanObj(v: any) {
+    this._bilanObj = v;
+    this.fields = [v.website, v.tpe1, v.tpe2];
+    this.advance = v.advance;
   }
-  @Input()
-  set bilanObj(value: any) {
-    this.charges = value.charges;
-    [...this.fields, this.advance].forEach(field => field.value = value.fields.find((vf: any) => vf.fieldName == field.fieldName).value)
+  public get bilanObj(): any {
+    return this._bilanObj;
   }
-  banknotes: Array<Currency> = [
-    new Currency('0.5 Franc', 0.5, 0),
-    new Currency('1 Franc', 1, 0),
-    new Currency('2 Franc', 2, 0),
-    new Currency('5 Franc', 5, 0),
-    new Currency('10 Franc', 10, 0),
-    new Currency('20 Franc', 20, 0),
-    new Currency('50 Franc', 50, 0),
-    new Currency('100 Franc', 100, 0),
-    new Currency('200 Franc', 200, 0),
-  ]
-  fields: Array<FieldToFill> = [
-    new FieldToFill('totalWebsite', "Total income from websites", 0),
-    new FieldToFill('totalTpe1', "Total income from TPE1", 0),
-    new FieldToFill('totalTpe2', "Total income from TPE2", 0),
-  ]
-  charges: Array<any> = []//new Array();
-  advance: FieldToFill = new FieldToFill('advance', "Total advance", 0);
+
+  fields: Array<FieldToFill> = []
+  advance: FieldToFill = new FieldToFill('advance', "Total advance", '');
   constructor(
     private authService: AuthService,
     private restaurantService: RestaurantService,
@@ -64,41 +54,30 @@ export class SummaryComponent implements OnInit {
   }
 
   getTotalBanknotes() {
-    return this.banknotes.reduce((res: number, cur: any) => res + cur.value * cur.nbr, 0)
+    return this.banknotesObj.reduce((res: number, cur: any) => res + parseInt(cur.value ? cur.value : '0') * parseInt(cur.nbr ? cur.nbr : '0'), 0)
   }
   getTotalCharges() {
-    return this.charges.reduce((res, cur) => res + cur.value, 0);
+    return this.bilanObj.charges.reduce((res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'), 0);
   }
   getTotalIncome() {
-    return this.fields.reduce((res, cur) => res + cur.value, 0) - this.charges.reduce((res, cur) => res + cur.value, 0) - this.advance.value;
+    return this.fields.reduce((res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'), 0) -
+      this.bilanObj.charges.reduce((res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'), 0) -
+      parseInt(this.advance.value ? this.advance.value : '0');
   }
   printPage() {
     window.print();
   }
   SaveConf() {
-
+    this.onSubmit.emit(true)
   }
-
-}
-
-class Currency {
-  label: string;
-  value: number;
-  nbr: number;
-  constructor(label: string, value: number, nbr: number) {
-    this.label = label;
-    this.value = value;
-    this.nbr = nbr;
+  getBanknoteTotal(banknote: any) {
+    return banknote.value * parseInt(banknote.nbr ? banknote.nbr : '0')
   }
-}
-
-class FieldToFill {
-  fieldName: string;
-  label: string;
-  value: number;
-  constructor(fieldName: string, label: string, value: number) {
-    this.fieldName = fieldName;
-    this.label = label;
-    this.value = value;
+  onKeyPress(event: any) {
+    const pattern = /[0-9]/;
+    const inputChar = String.fromCharCode(event.charCode);
+    if (!pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
 }
