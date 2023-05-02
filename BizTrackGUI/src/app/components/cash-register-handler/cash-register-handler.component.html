@@ -13,18 +13,20 @@
                             <th>Owned</th>
                             <th>To keep</th>
                         </tr>
-                        <tr *ngFor="let curr of banknotes; let idx=index">
-                            <td>{{banknotes[idx].label}}</td>
-                            <td>{{banknotes[idx].nbr}}</td>
-                            <td>{{OWNED_TO_USE_STATIC[idx]}}</td>
-                            <td>{{RESULT_TO_USE_STATIC[idx]}}</td>
+                        <tr *ngFor="let curr of banknotesObj; let idx=index">
+                            <td>{{banknotesObj[idx].label}}</td>
+                            <td>{{defaultVals[idx]}}</td>
+                            <td>{{ownedToUse[idx]}}</td>
+                            <td>{{resToUse[idx]}}</td>
                         </tr>
                     </table>
                 </div>
+                <h1 class="totalH1">Default total : {{defaultTotal}}</h1>
+                <h1 class="totalH1">Total kept : {{totalKept}}</h1>
             </div>
             <div class="custom-card-footer">
                 <div class="invoice-icon">
-                    <button class="no-print saveconf">Done</button>
+                    <button (click)="submit()" class="no-print saveconf">Done</button>
                 </div>
             </div>
         </div>

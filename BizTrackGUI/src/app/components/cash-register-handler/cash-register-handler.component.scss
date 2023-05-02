@@ -37,7 +37,6 @@
     }
 }
 
-
 .invoice-icon {
     width: 100% !important;
 
@@ -48,9 +47,17 @@
     }
 }
 
-.custom-card .custom-card-footer{
+.custom-card .custom-card-footer {
     padding: 15px;
 }
-.custom-card .custom-card-header{
+
+.custom-card .custom-card-header {
     padding: 20px 50px 15px 50px;
+}
+
+.totalH1 {
+    background-color: #e5edf2 !important;
+    margin: auto !important;
+    margin-top: 5px !important;
+    width: 50%;
 }

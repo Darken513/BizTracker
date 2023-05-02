@@ -1,6 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./database.db');
 const db_utils = require('../services/database')
+const usersDB = require("../models/user.model");
 
 exports.createNew = async ({name, email, address, phone}) => {
     try {
@@ -23,6 +24,20 @@ exports.getById = async (id) => {
 exports.getAll = async () => {
     try {
         let rows = await db_utils.getAllSync(db, `SELECT * FROM RESTAURANTS`);
+        return rows ? rows : [];
+    } catch (err) {
+        console.log(err);
+        return { error: err.message };
+    }
+}
+exports.getAllwithDetails = async () => {
+    try {
+        let rows = await db_utils.getAllSync(db, `SELECT * FROM RESTAURANTS`);
+        for (let idx = 0; idx < rows.length; idx++) {
+            const restaurant = rows[idx];
+            let users = await usersDB.getAllByResturantId(restaurant.id);
+            restaurant.users = users;
+        }
         return rows ? rows : [];
     } catch (err) {
         console.log(err);

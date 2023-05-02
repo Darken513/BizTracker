@@ -10,6 +10,7 @@ import { FieldToFill } from 'src/app/Models/FieldToFill';
 })
 export class BilanWrapperComponent implements OnInit {
   page_idx:number = 0
+  coinsToLeave:Array<number>=[]
   banknotes: Array<Currency> = [
     new Currency('../../assets/05franc.png', '0.5 Franc', 0.5, ''),
     new Currency('../../assets/1franc.png', '1 Franc', 1, ''),

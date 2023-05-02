@@ -1,0 +1,103 @@
+.custom-card{
+    height: auto;
+}
+.custom-card-body {
+    background-color: rgba(255, 255, 255, 0.85);
+    width: 80%;
+    max-width: 1000px;
+    margin: auto;
+    cursor: default;
+
+    section {
+        padding: 10px;
+        div.editable {
+            margin: 1px 0;
+
+            input {
+                display: inline-block;
+                margin: 0;
+                width: calc(100% - 120px);
+                border: none;
+                background: transparent;
+                border-bottom: 1px solid grey;
+                margin-left: -5px;
+                margin-top: -2px;
+            }
+
+            .labelSpan {
+                position: relative;
+            }
+
+            .labelSpan img {
+                display: none;
+                position: absolute;
+                top: 10px;
+                left: 50px;
+            }
+
+            .labelSpan:hover img {
+                display: block;
+                height: 250px;
+                object-fit: contain;
+                box-shadow: 0 0 10px black;
+            }
+        }
+
+        label,
+        input,
+        select {
+            font-size: 1rem;
+            width: calc(100% - 40px);
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .full-width{
+            width: 100% !important;
+        }
+        label {
+            font-size: 1.3rem;
+            margin: 5px 0;
+            font-weight: 600;
+        }
+
+        .labelSpan {
+            font-weight: 600;
+            width: 85px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .contentSpan {
+            width: calc(100% - 125px);
+            display: inline-block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            vertical-align: top;
+        }
+
+        button {
+            background: transparent;
+            border: none;
+        }
+    }
+    .row section:only-of-type{
+        padding: 5px 35px;
+    }
+    .row section:first-of-type{
+        padding-left: 35px;
+        padding-bottom: 20px;
+        border-right: 1px solid grey
+    }
+    .row section:last-of-type{
+        padding-right: 35px;
+        padding-bottom: 20px;
+    }
+    .row section.standalone{
+        border: none;
+        hr{
+            width: calc(100% - 35px);
+            position: relative;
+            left: 17.5px;
+        }
+    }
+}

@@ -1,0 +1,143 @@
+<div class="inner-container">
+    <div class="custom-card">
+        <div class="custom-card-body">
+            <div class="row">
+                <section class="col-lg-6 col-12">
+                    <label for="resturantSelector">Resturant</label>
+                    <select (change)="onResturantChange($event)" name="resturantSelector" id="resturantSelector">
+                        <option *ngFor="let restaurant of restaurants" value="{{ restaurant.id }}">
+                            {{ restaurant.name }}
+                        </option>
+                    </select>
+                    <button><i class="fa fa-plus"></i></button>
+                    <div class="editable">
+                        <span class="labelSpan">id : </span>{{ selectedResturant ? selectedResturant.id : "-" }}
+                    </div>
+                    <div class="editable">
+                        <span class="labelSpan">Email : </span>
+                        <span class="contentSpan">
+                            {{ selectedResturant ? selectedResturant.email : "-" }}
+                        </span>
+                    </div>
+                    <div class="editable">
+                        <span class="labelSpan">Name : </span>
+                        <span *ngIf="resEditField != 0" class="contentSpan">
+                            {{ selectedResturant ? selectedResturant.name : "-" }}
+                        </span>
+                        <input type="text" *ngIf="resEditField == 0"
+                            [value]="selectedResturant ? selectedResturant.name : '-'" />
+                        <button *ngIf="resEditField != 0" (click)="resEditField = 0">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <button *ngIf="resEditField == 0" (click)="onResFieldSubmit($event)">
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                    <div class="editable">
+                        <span class="labelSpan">Address : </span>
+                        <span *ngIf="resEditField != 1" class="contentSpan">
+                            {{ selectedResturant ? selectedResturant.address : "-" }}
+                        </span>
+                        <input type="text" *ngIf="resEditField == 1"
+                            [value]="selectedResturant ? selectedResturant.address : '-'" />
+                        <button *ngIf="resEditField != 1" (click)="resEditField = 1">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <button *ngIf="resEditField == 1" (click)="onResFieldSubmit($event)">
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                    <div class="editable">
+                        <span class="labelSpan">Phone : </span>
+                        <span *ngIf="resEditField != 2" class="contentSpan">
+                            {{ selectedResturant ? selectedResturant.phone : "-" }}
+                        </span>
+                        <input type="text" *ngIf="resEditField == 2"
+                            [value]="selectedResturant ? selectedResturant.phone : '-'" />
+                        <button *ngIf="resEditField != 2" (click)="resEditField = 2">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <button *ngIf="resEditField == 2" (click)="onResFieldSubmit($event)">
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                    <div class="editable">
+                        <span class="labelSpan">Image :
+                            <img *ngIf="selectedResturant && selectedResturant.img" [src]="selectedResturant.img"
+                                alt="Uploaded Image"></span>
+                        <input type="file" (change)="onFileSelected($event)" />
+                    </div>
+                </section>
+                <section class="col-lg-6 col-12">
+                    <ng-container *ngIf="selectedResturant">
+                        <label for="userSelector">User</label>
+                        <select (change)="onuserChange($event)" name="userSelector" id="userSelector">
+                            <option *ngFor="let user of selectedResturant.users" value="{{ user.id }}">
+                                {{ user.username }}
+                            </option>
+                        </select>
+                        <button><i class="fa fa-plus"></i></button>
+                        <div class="user-wrapper" *ngIf="selectedUser">
+                            <div class="editable">
+                                <span class="labelSpan">address : </span>
+                                <span *ngIf="userEditField != 0" class="contentSpan">
+                                    {{ selectedUser ? selectedUser.address : "-" }}
+                                </span>
+                                <input type="text" *ngIf="userEditField == 0"
+                                    [value]="selectedUser ? selectedUser.address : '-'" />
+                                <button *ngIf="userEditField != 0" (click)="userEditField = 0">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button *ngIf="userEditField == 0" (click)="onUserFieldSubmit($event)">
+                                    <i class="fa fa-check"></i>
+                                </button>
+                            </div>
+                            <div class="editable">
+                                <span class="labelSpan">phone : </span>
+                                <span *ngIf="userEditField != 1" class="contentSpan">
+                                    {{ selectedUser ? selectedUser.phone : "-" }}
+                                </span>
+                                <input type="text" *ngIf="userEditField == 1"
+                                    [value]="selectedUser ? selectedUser.phone : '-'" />
+                                <button *ngIf="userEditField != 1" (click)="userEditField = 1">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button *ngIf="userEditField == 1" (click)="onUserFieldSubmit($event)">
+                                    <i class="fa fa-check"></i>
+                                </button>
+                            </div>
+                            <div class="editable">
+                                <span class="labelSpan">password : </span>
+                                <span *ngIf="userEditField != 2" class="contentSpan">
+                                    {{ selectedUser ? "*************" : "-" }}
+                                </span>
+                                <input type="text" *ngIf="userEditField == 2" placeholder="password" />
+                                <button *ngIf="userEditField != 2" (click)="userEditField = 2">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button *ngIf="userEditField == 2" (click)="onUserFieldSubmit($event)">
+                                    <i class="fa fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </section>
+            </div>
+            <div class="row">
+                <hr>
+                <section class="standalone">
+                    <label for="defaultEmail">Default central email</label>
+                    <input class="full-width" type="text" placeholder="Default central email" [value]="defaultEmail">
+                </section>
+                <hr>
+            </div>
+            <div class="row">
+                <hr>
+                <section class="standalone" *ngIf="selectedResturant">
+                    <label>Default banknotes to leave</label>
+                </section>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>

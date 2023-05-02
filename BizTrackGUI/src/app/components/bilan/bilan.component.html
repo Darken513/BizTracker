@@ -1,60 +1,57 @@
 <div class="inner-container">
     <h1 class="title">Select Current Establishment</h1>
-    <div class="row">
-        <div class="custom-card">
-            <div class="custom-card-body">
-                <div class="body-card-inner">
-                    <h1>{{bilanObj.website.label}}</h1>
-                    <input type="number" min="0" placeholder="0" name="{{bilanObj.website.fieldName}}"
-                        (keypress)="onKeyPress($event)" [(ngModel)]="bilanObj.website.value">
+    <div class="custom-card">
+        <div class="custom-card-body">
+            <div class="body-card-inner">
+                <h1>{{bilanObj.website.label}}</h1>
+                <input type="number" min="0" placeholder="0" name="{{bilanObj.website.fieldName}}"
+                    (keypress)="onKeyPress($event)" [(ngModel)]="bilanObj.website.value">
+            </div>
+        </div>
+    </div>
+    <div class="custom-card" [ngStyle]="{'height':getChargesHeight()}">
+        <div class="custom-card-body">
+            <div class="body-card-inner" [ngStyle]="{'height':getChargesHeight()}">
+                <h1>total charges : {{getTotalCharges()}}</h1>
+                <div class="charge-wrapper" *ngFor="let charge of bilanObj.charges; let idx = index;">
+                    <button class="deleteCharge" (click)="deleteCharge(idx)"><i class="fa fa-times"></i></button>
+                    <h1>{{charge.label}}</h1>
+                    <input type="number" min="0" placeholder="0" name="{{charge.fieldName+'_charge'}}"
+                        (keypress)="onKeyPress($event)" [(ngModel)]="charge.value">
+                </div>
+                <div class="newcharge-wrapper">
+                    <input type="text" placeholder="Charge label" name="newCharge_label" [(ngModel)]="newCharge.label">
+                    <input type="number" min="0" placeholder="0" placeholder="Charge cost" name="newCharge_value"
+                        (keypress)="onKeyPress($event)" [(ngModel)]="newCharge.value">
+                    <button class="addCharge" (click)="addCharge()"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
         </div>
-        <div class="custom-card" [ngStyle]="{'height':getChargesHeight()}">
-            <div class="custom-card-body">
-                <div class="body-card-inner" [ngStyle]="{'height':getChargesHeight()}">
-                    <h1>total charges : {{getTotalCharges()}}</h1>
-                    <div class="charge-wrapper" *ngFor="let charge of bilanObj.charges; let idx = index;">
-                        <button class="deleteCharge" (click)="deleteCharge(idx)"><i class="fa fa-times"></i></button>
-                        <h1>{{charge.label}}</h1>
-                        <input type="number" min="0" placeholder="0" name="{{charge.fieldName+'_charge'}}"
-                            (keypress)="onKeyPress($event)" [(ngModel)]="charge.value">
-                    </div>
-                    <div class="newcharge-wrapper">
-                        <input type="text" placeholder="Charge label" name="newCharge_label"
-                            [(ngModel)]="newCharge.label">
-                        <input type="number" min="0" placeholder="0" placeholder="Charge cost" name="newCharge_value"
-                            (keypress)="onKeyPress($event)" [(ngModel)]="newCharge.value">
-                        <button class="addCharge" (click)="addCharge()"><i class="fa fa-plus"></i></button>
-                    </div>
-                </div>
+    </div>
+    <div class="custom-card">
+        <div class="custom-card-body">
+            <div class="body-card-inner">
+                <h1>{{bilanObj.advance.label}}</h1>
+                <input type="number" min="0" placeholder="0" name="{{bilanObj.advance.fieldName}}"
+                    (keypress)="onKeyPress($event)" [(ngModel)]="bilanObj.advance.value">
             </div>
         </div>
-        <div class="custom-card">
-            <div class="custom-card-body">
-                <div class="body-card-inner">
-                    <h1>{{bilanObj.advance.label}}</h1>
-                    <input type="number" min="0" placeholder="0" name="{{bilanObj.advance.fieldName}}"
-                        (keypress)="onKeyPress($event)" [(ngModel)]="bilanObj.advance.value">
-                </div>
+    </div>
+    <div class="custom-card">
+        <div class="custom-card-body">
+            <div class="body-card-inner">
+                <h1>{{bilanObj.tpe1.label}}</h1>
+                <input type="number" min="0" placeholder="0" name="{{bilanObj.tpe1.fieldName}}"
+                    (keypress)="onKeyPress($event)" [(ngModel)]="bilanObj.tpe1.value">
             </div>
         </div>
-        <div class="custom-card">
-            <div class="custom-card-body">
-                <div class="body-card-inner">
-                    <h1>{{bilanObj.tpe1.label}}</h1>
-                    <input type="number" min="0" placeholder="0" name="{{bilanObj.tpe1.fieldName}}"
-                        (keypress)="onKeyPress($event)" [(ngModel)]="bilanObj.tpe1.value">
-                </div>
-            </div>
-        </div>
-        <div class="custom-card">
-            <div class="custom-card-body">
-                <div class="body-card-inner">
-                    <h1>{{bilanObj.tpe2.label}}</h1>
-                    <input type="number" min="0" placeholder="0" name="{{bilanObj.tpe2.fieldName}}"
-                        (keypress)="onKeyPress($event)" [(ngModel)]="bilanObj.tpe2.value">
-                </div>
+    </div>
+    <div class="custom-card">
+        <div class="custom-card-body">
+            <div class="body-card-inner">
+                <h1>{{bilanObj.tpe2.label}}</h1>
+                <input type="number" min="0" placeholder="0" name="{{bilanObj.tpe2.fieldName}}"
+                    (keypress)="onKeyPress($event)" [(ngModel)]="bilanObj.tpe2.value">
             </div>
         </div>
     </div>

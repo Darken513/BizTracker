@@ -18,6 +18,7 @@ import { BilanWrapperComponent } from './components/bilan-wrapper/bilan-wrapper.
 import { NotSignedInGuard } from './notSignedIn.guard';
 import { CashRegisterHandlerComponent } from './components/cash-register-handler/cash-register-handler.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminPannelComponent } from './admin-pannel/admin-pannel.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ProfileComponent } from './profile/profile.component';
     BilanWrapperComponent,
     CashRegisterHandlerComponent,
     ProfileComponent,
+    AdminPannelComponent,
   ],
   imports: [
     BrowserModule,

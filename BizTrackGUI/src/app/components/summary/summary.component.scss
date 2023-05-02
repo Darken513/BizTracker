@@ -109,6 +109,32 @@ button.saveconf {
     background: #5ba820;
 }
 
+.custom-card .custom-card-body .body-card-inner .banknote-francs {
+    table {
+        width: 100%;
+
+        td {
+            overflow-wrap: anywhere;
+        }
+
+        tr td:nth-child(1) {
+            width: 34%;
+        }
+
+        tr td:nth-child(2) {
+            width: 25%;
+        }
+
+        tr td:nth-child(3) {
+            width: 25%;
+        }
+
+        tr td:nth-child(4) {
+            width: 20%;
+        }
+    }
+}
+
 @media print {
     .no-print {
         display: none;

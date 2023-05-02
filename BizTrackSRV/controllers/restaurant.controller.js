@@ -8,6 +8,23 @@ exports.getAll = async (req, res) => {
     res.json({ title: "Error", body: "No Data available." });
   }
 };
+exports.getAllwithDetails = async (req, res) => {
+  const restaurants = await restaurantDB.getAllwithDetails();
+  if (restaurants) {
+    let toret = []
+    restaurants.forEach(restaurant => {
+      let restWrapper = toret.find((res)=> restaurant.restaurantId == res.restaurantId)
+      if(restWrapper){
+
+      }else{
+        let topush = {}
+      }
+    });
+    res.json({restaurants});
+  } else {
+    res.json({ title: "Error", body: "No Data available." });
+  }
+};
 
 exports.getById = async (req, res) => {
   const id = req.params.id;
