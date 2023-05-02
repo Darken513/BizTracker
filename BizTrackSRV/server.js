@@ -9,6 +9,7 @@ const chargesRouter = require('./routers/charges.router');
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("./database.db");
 const db_utils = require('./services/database')
+const port = process.env.PORT || 8080;
 
 const app = express();
 app.use(express.static('public'));
@@ -27,7 +28,7 @@ async function init() {
 }
 
 init();
-app.listen(process.env.port ? process.env.port : 80, () => console.log('Server started on port 80'));
+app.listen(port, () => console.log('Server started on port 80'));
 process.on('uncaughtException', (error) => {
   console.error('Error: ', error);
 });
