@@ -1,7 +1,7 @@
 <div class="wrapper-container">
     <div class="header-div no-print">
         <button *ngIf="page_idx" (click)="page_idx=page_idx-1" class="navigationBtn left"><i class="fa fa-arrow-left"></i></button>
-        <h1 (click)="logout()"><i class="fa fa-user"></i>Logout</h1>
+        <h1 (click)="logout()"><i class="fa fa-user"></i> Se déconnecter</h1>
     </div>
     <div class="wrapper-body">
         <app-banknote-summary *ngIf="page_idx==0" [banknotes]="banknotes" (onSubmit)="page_idx=1"></app-banknote-summary>

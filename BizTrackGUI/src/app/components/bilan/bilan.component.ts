@@ -28,11 +28,17 @@ export class BilanComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  getallChargesHeight() {
+    return parseFloat(this.getChargesHeight()) + parseFloat(this.getAdvancesHeight()) + parseFloat(this.getAdvancesHeight()) + 95 + "px"
+  }
   getChargesHeight() {
-    return this.bilanObj.charges.length * 40 + 120 + 'px'
+    return this.bilanObj.charges.length * 40 + 95 + 'px'
+  }
+  getAdvancesHeight() {
+    return this.bilanObj.charges.length * 40 + 95 + 'px'
   }
   getTotalCharges() {
-    return this.bilanObj.charges.reduce((res: any, curr: any) => res + parseFloat(curr.value ? curr.value : '0'), 0) + ' Fr'
+    return this.bilanObj.charges.reduce((res: any, curr: any) => res + parseFloat(curr.value ? curr.value : '0'), 0) + ' CHF'
   }
   addCharge() {
     if (!this.newCharge.label && !parseFloat(this.newCharge.value ? this.newCharge.value : '0')) {

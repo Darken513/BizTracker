@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from '../services/restaurant.service';
 import { NotificationService } from '../services/notification.service';
 import { HttpClient } from '@angular/common/http';
+import { Currency } from '../Models/Currency';
 
 @Component({
   selector: 'app-admin-pannel',
@@ -10,28 +11,59 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AdminPannelComponent implements OnInit {
   restaurants: Array<any> = [];
-  defaultEmail:string = "";
+  defaultEmail: string = "";
   selectedResturant: any;
   resEditField: number = -1;
   selectedUser: any;
   userEditField: number = -1;
+  //todo banknotes should be a part of a resturant data not a static list
+  banknotes: Array<Currency> = [
+    new Currency('../../assets/005CHF.png', '0.05 CHF', 0.05, ''),
+    new Currency('../../assets/020CHF.png', '0.10 CHF', 0.1, ''),
+    new Currency('../../assets/010CHF.png', '0.20 CHF', 0.2, ''),
+    new Currency('../../assets/05CHF.png', '0.5 CHF', 0.5, ''),
+    new Currency('../../assets/1CHF.png', '1 CHF', 1, ''),
+    new Currency('../../assets/2CHF.png', '2 CHF', 2, ''),
+    new Currency('../../assets/5CHF.png', '5 CHF', 5, ''),
+    new Currency('../../assets/10CHF.png', '10 CHF', 10, ''),
+    new Currency('../../assets/20CHF.png', '20 CHF', 20, ''),
+    new Currency('../../assets/50CHF.png', '50 CHF', 50, ''),
+    new Currency('../../assets/100CHF.png', '100 CHF', 100, ''),
+    new Currency('../../assets/200CHF.png', '200 CHF', 200, '')
+  ];
+
   constructor(
     private http: HttpClient,
     private restaurantService: RestaurantService,
     private notifService: NotificationService
   ) { }
-  /*
-{
-    "id": 1,
-    "password": "$2b$10$jG0qOXRa5bU9RA1LDZhS0O8pJKOWZ89EtP3EceyNlDzgWZ0a2Cgwi",
-    "email": "affesachraf70@gmail.com",
-    "username": "Affes Achraf",
-    "address": "Gremda km9",
-    "phone": "+21644112277",
-    "restaurantId": 1,
-    "created_at": "2023-04-21 01:48:40"
-}
-*/
+
+  getTotalValue() {
+    return this.banknotes.reduce((toret: number, curr: Currency) => {
+      toret += curr.value * parseInt(curr.nbr ? curr.nbr : '0');
+      return toret;
+    }, 0)
+  }
+  reduceCurrency(currency: any) {
+    const currentNbr = parseInt(currency.nbr ? currency.nbr : 0);
+    if (currentNbr > 0)
+      currency.nbr = (currentNbr - 1).toString()
+  }
+  increaseCurrency(currency: any) {
+    const currentNbr = parseInt(currency.nbr ? currency.nbr : 0);
+    currency.nbr = (currentNbr + 1).toString()
+  }
+  onKeyPress(event: any) {
+    const pattern = /[0-9]/;
+    const inputChar = String.fromCharCode(event.charCode);
+    if (!pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+  submit() {
+    //this.onSubmit.emit(true);
+  }
+
   ngOnInit(): void {
     this.restaurantService.getAllDetails().subscribe({
       next: (response: any) => {
@@ -64,7 +96,7 @@ export class AdminPannelComponent implements OnInit {
   }
   onuserChange(event: any) {
     this.selectedUser = this.selectedResturant.users.find(
-      (user:any) => user.id == event.target.value
+      (user: any) => user.id == event.target.value
     );
   }
   onResFieldSubmit(event: any) {
@@ -86,7 +118,7 @@ export class AdminPannelComponent implements OnInit {
     }
     this.resEditField = -1;
   }
-  onUserFieldSubmit(event:any){
+  onUserFieldSubmit(event: any) {
     switch (this.userEditField) {
       case 0:
         this.selectedUser.address =

@@ -9,7 +9,7 @@ const chargesRouter = require('./routers/charges.router');
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("./database.db");
 const db_utils = require('./services/database')
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 
 const app = express();
 app.use(express.static('public'));

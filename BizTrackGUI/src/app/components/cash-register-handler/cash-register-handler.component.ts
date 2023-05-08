@@ -9,8 +9,8 @@ import * as _ from "lodash"
 export class CashRegisterHandlerComponent implements OnInit {
   @Input() banknotesObj: Array<Currency> = [];
   @Output() onSubmit = new EventEmitter<any>();
-  CURRENCY_VALUES: Array<number> = [0.5, 1, 2, 5, 10, 20, 50, 100, 200];
-  defaultVals: Array<number> = [10, 5, 5, 2, 2, 1, 0, 0, 0];
+  CURRENCY_VALUES: Array<number> = [0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200];
+  defaultVals: Array<number> = [0, 0, 0, 10, 10, 10, 5, 5, 5, 2, 0, 0];
   ownedToUse: Array<number> = [];
   resToUse: Array<number> = [];
   defaultTotal: number = 0;
@@ -77,7 +77,7 @@ export class CashRegisterHandlerComponent implements OnInit {
     }
     return toreturn;
   }
-  submit(){
+  submit() {
     this.onSubmit.emit(this.resToUse);
   }
 }

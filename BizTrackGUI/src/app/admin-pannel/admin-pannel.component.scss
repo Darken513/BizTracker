@@ -101,3 +101,106 @@
         }
     }
 }
+.banknotes-section{
+    .custom-card .custom-card-body{
+        box-shadow: 0 10px 15px 2px #a1a1a1 !important;
+    }
+    .custom-card {
+        height: 115px;
+        padding-top: 10px;
+        .currencyPic-wrapper{
+            width: 105px;
+            display: inline-block;
+            .currencyPic{
+                width: 100px;
+                height: 70px;
+                background-size:contain;
+                background-repeat: no-repeat;
+                object-fit: contain;
+            }
+        }
+        .currencuDetails{
+            vertical-align: top;
+            display: inline-block;
+            width: calc(100% - 105px);
+            h1{
+                font-size: 1rem;
+                text-align: center;
+                font-weight: 500;
+            }
+            .input-wrapper{
+                margin-top: 5px;
+                button{
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    height: 35px;
+                    width: 35px;
+                    background: #cdcdcd;
+                    border: 1px solid grey;
+                }
+                input{
+                    width: calc(100% - 70px);
+                    height: 35px;
+                    border-radius: 0;
+                    border: 1px solid grey;
+                    border-left: none;
+                    border-right: none;
+                    text-align: center;
+                }
+                button:first-of-type{
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                }
+                button:last-of-type{
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                }
+            }
+        }
+        .custom-card-body{
+            width: 100%;
+        }
+        .custom-card-body .body-card-inner {
+            position: absolute;
+            height: 105px;
+            background-color: white;
+            border-radius: 20px;
+            width: 100%;
+            padding: 15px;
+            left: 0;
+            bottom: 0px;
+        }
+    }
+    .card-total{
+        width: 290px;
+        margin-top: 10px;
+        padding: 0;
+        h1{
+            background-color: white;
+            font-weight: 600;
+            text-align: end;
+            margin: 0;
+        }
+        h1:last-of-type{
+            margin: -5px;
+        }
+        .custom-card-body{
+            box-shadow: 0 5px 5px #0e0e0e;
+        }
+    }
+    .btn-submit{
+        width: 230px;
+        height: 46px;
+        border-radius: 10px;
+        background: yellowgreen;
+        font-weight: 400;
+        font-size: 1.5rem;
+        border: none;
+        margin-top: 15px;
+        box-shadow: 0 3px 5px black;
+        margin-left: 25px;
+    }
+    .custom-card:not(.card-total) .custom-card-body .body-card-inner h1{
+        background-color: #d8dbdb;
+    }
+}

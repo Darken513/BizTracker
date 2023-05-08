@@ -2,17 +2,18 @@
     height: 120px;
     max-width: 750px;
     margin: auto;
+    padding: 3px;
     margin-bottom: 5px;
     h1{
         text-align: center;
     }
     .custom-card-body .body-card-inner {
         position: static;
-        height: 120px;
+        height: 90px;
         background-color: white;
         border-radius: 20px;
         width: 100%;
-        padding: 15px;
+        padding: 5px 15px;
     }
     input{
         width: 100%;
@@ -81,4 +82,16 @@
     margin: auto;
     margin-top: 15px;
     box-shadow: 0 3px 8px black;
+}
+.custom-card.cardBoxWrapper {
+    height: 280px;
+    margin-top: 0;
+    margin-bottom: 0;
+    h1.mainTitle{
+        margin: 0;
+        padding-top: 15px;
+    }
+    .custom-card-body{
+        background: white;
+    }
 }

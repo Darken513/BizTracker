@@ -1,5 +1,5 @@
 <div class="inner-container">
-    <h1 class="title">Deposit Funds in the cash register</h1>
+    <h1 class="title">Détail de l'espèce dans la caisse</h1>
     <div class="row">
         <ng-container *ngFor="let currency of banknotes">
             <div class="custom-card col-lg-4 col-sm-6">
@@ -9,7 +9,7 @@
                             <img class="currencyPic" [src]="currency.img" alt="">
                         </div>
                         <div class="currencuDetails">
-                            <h1>{{currency.value}} franc</h1>
+                            <h1>{{currency.value}} CHF</h1>
                             <div class="input-wrapper">
                                 <button (click)="reduceCurrency(currency)">-</button>
                                 <input placeholder="{{0}}" type="number" min="0" (keypress)="onKeyPress($event)" [(ngModel)]="currency.nbr">
@@ -25,12 +25,12 @@
         <div class="custom-card card-total">
             <div class="custom-card-body">
                 <div class="body-card-inner">
-                    <h1>Total Cash</h1>
-                    <h1>{{getTotalValue()}} Fr</h1>
+                    <h1>Total des espèces</h1>
+                    <h1>{{getTotalValue()}} CHF</h1>
                 </div>
             </div>
         </div>
-        <button class="btn-submit" (click)="submit()">Next <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        <button class="btn-submit" (click)="submit()">Suivant <i class="fa fa-arrow-right" aria-hidden="true"></i>
         </button>
     </div>
 </div>

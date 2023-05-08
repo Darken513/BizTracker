@@ -1,5 +1,5 @@
 <div class="inner-container">
-    <h1 class="title">Which Employee Are you ?</h1>
+    <h1 class="title">Choix de l'employé</h1>
     <div class="row">
         <ng-container *ngFor="let employee of employeesList; let idx = index">
             <div [routerLink]="['/auth/login', resId ,employee.username]" class="custom-card col-lg-4 col-sm-6">
