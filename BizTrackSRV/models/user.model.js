@@ -4,10 +4,10 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./database.db');
 const db_utils = require('../services/database')
 
-exports.createNew = async ({ password, email, address, phone, username, restaurantId }) => {
+exports.createNew = async ({ password, email, address, phone, username}) => {
     let hash = bcrypt.hashSync(password, saltRounds);
     try {
-        return await db_utils.runSync(db, `INSERT INTO USERS (password, email, username, address, phone, restaurantId) VALUES (?, ?, ?, ?, ?, ?)`, [hash, email, username, address, phone, restaurantId]);
+        return await db_utils.runSync(db, `INSERT INTO USERS (password, email, username, address, phone) VALUES (?, ?, ?, ?, ?)`, [hash, email, username, address, phone]);
     } catch (err) {
         console.log(err)
         return { error: err.message.includes('SQLITE_CONSTRAINT') ? 'User already exists' : 'An error has occurred' };
@@ -50,7 +50,7 @@ exports.getById = async (id) => {
     }
 }
 exports.getAllByResturantId = async (restaurant_id) => {
-    const query = `SELECT * FROM USERS WHERE restaurantId = ?`;
+    const query = `SELECT u.* FROM USERS u join USER_RESTAURANT ur on u.id = ur.userId WHERE ur.restaurantId = ?`;
     try {
         let row = await db_utils.getAllSync(db, query, [restaurant_id]);
         return row ? row : undefined; //refactor this into a base model class

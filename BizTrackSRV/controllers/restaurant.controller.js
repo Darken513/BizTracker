@@ -1,4 +1,5 @@
 const restaurantDB = require("../models/restaurant.model");
+const userRestaurantDB = require("../models/user_restaurant.model");
 
 exports.getAll = async (req, res) => {
   const restaurants = await restaurantDB.getAll();
@@ -45,4 +46,15 @@ exports.createNew = async (req, res) => {
   res
     .status(201)
     .json({ title: "Success", body: "Restaurant created successfully." });
+};
+
+exports.assignUserRestaurant = async (req, res) => {
+  try {
+    await userRestaurantDB.createNew(req.body);
+  } catch (error) {
+    console.log(error)
+  } 
+  res
+    .status(201)
+    .json({ title: "Success", body: "user assigned to the Restaurant successfully." });
 };

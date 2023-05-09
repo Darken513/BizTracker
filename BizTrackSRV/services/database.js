@@ -18,9 +18,18 @@ exports.initDataBase = async (db) => {
             username TEXT NOT NULL UNIQUE,
             address TEXT,
             phone TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );`
+    )
+    await exports.runSync(db, `
+        CREATE TABLE IF NOT EXISTS USER_RESTAURANT (
+            id INTEGER PRIMARY KEY,
+            userId INTEGER NOT NULL,
             restaurantId INTEGER NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY(restaurantId) REFERENCES RESTAURANTS(id)
+            FOREIGN KEY(userId) REFERENCES USERS(id),
+            FOREIGN KEY(restaurantId) REFERENCES RESTAURANTS(id),
+            UNIQUE(userId, restaurantId)
         );`
     )
     await exports.runSync(db, `
