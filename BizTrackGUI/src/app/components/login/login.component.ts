@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
 
-    this.authService.login(username, password).subscribe({
+    this.authService.login(username, password, this.resId).subscribe({
       next: (response: any) => {
         if (response.title && response.body) {
           this.notifService.showNotification(response.title, response.body)

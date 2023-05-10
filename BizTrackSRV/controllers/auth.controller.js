@@ -1,9 +1,11 @@
 const jwt = require("jsonwebtoken");
 const userDB = require("../models/user.model");
+const restaurantDB = require("../models/restaurant.model");
 
 exports.login = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, resId } = req.body;
   const user = await userDB.getByUsernameAndPassword(username, password);
+  const restaurant = await restaurantDB.getById(resId);
   if (user) {
     const token = jwt.sign(
       {
@@ -12,7 +14,11 @@ exports.login = async (req, res) => {
         email: user.email,
         phone: user.phone,
         address: user.address,
-        restaurantId: user.restaurantId,
+        restaurant: {
+          id: restaurant.id,
+          name: restaurant.name,
+          address: restaurant.address
+        }
       },
       "BizTrackLongKeyHere!!"
     ); //make the key a general constant

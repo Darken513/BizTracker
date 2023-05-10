@@ -15,8 +15,8 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  public login(username: string, password: string): Observable<any> {
-    return this.http.post<{ response: any }>(`${this.apiUrl}/login`, { username, password });
+  public login(username: string, password: string, resId:number): Observable<any> {
+    return this.http.post<{ response: any }>(`${this.apiUrl}/login`, { username, password, resId });
   }
 
   public setToken(token: string, dontNav?: boolean): void {

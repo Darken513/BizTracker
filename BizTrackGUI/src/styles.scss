@@ -226,6 +226,15 @@ body {
     .navigationBtn {
         width: 45px !important;
     }
+    .custom-card-header.is-summary .invoice-icon {
+        display: none !important;
+    }
+    .custom-card-header.is-summary .invoice-details{
+        width: 100% !important;
+    }
+    button.no-print.is-summary{
+        width: 125px !important;
+    }
 }
 
 @keyframes move-leftright {

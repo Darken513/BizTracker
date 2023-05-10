@@ -95,5 +95,4 @@ export class BilanComponent implements OnInit {
 }
 
 // to-do
-// fix the restaurant + address name in the final report
 // send mail & save the details as a single json somewhere -> could help in future work

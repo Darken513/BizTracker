@@ -1,16 +1,16 @@
 <div class="inner-container">
     <div class="custom-card">
         <div class="custom-card-body">
-            <div class="custom-card-header">
+            <div class="custom-card-header is-summary">
                 <div class="invoice-icon">
                     <i class="fa fa-credit-card" aria-hidden="true"></i>
                     <h1>Facture</h1>
                 </div>
                 <div class="invoice-details">
                     <h1>Restaurant : {{restaurant?restaurant.name:''}} </h1>
-                    <h2>Adresse : {{restaurant?restaurant.address:''}}</h2>
                     <h2>Employé : {{username}}</h2>
                     <h2>Date&Heure : {{dateTime}}</h2>
+                    <!-- <h2>Adresse : {{restaurant?restaurant.address:''}}</h2> -->
                 </div>
             </div>
             <div class="body-card-inner">
@@ -88,10 +88,10 @@
                 </div>
             </div>
 
-            <div class="custom-card-footer">
+            <div class="custom-card-footer no-print">
                 <div class="invoice-icon">
-                    <button class="no-print" (click)="printPage()">Imprimer le rapport</button>
-                    <button class="no-print saveconf" (click)="SaveConf()">Valider le rapport</button>
+                    <button class="no-print is-summary" (click)="printPage()">Imprimer le rapport</button>
+                    <button class="no-print is-summary saveconf" (click)="SaveConf()">Valider le rapport</button>
                 </div>
                 <div class="invoice-details">
                     <h2><i style="margin-right: 10px;" class="fa fa-money" aria-hidden="true"> </i> TOTAL</h2>

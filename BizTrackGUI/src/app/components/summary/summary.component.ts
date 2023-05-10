@@ -29,7 +29,6 @@ export class SummaryComponent implements OnInit {
   fields: Array<FieldToFill> = [];
   constructor(
     private authService: AuthService,
-    private restaurantService: RestaurantService
   ) {}
 
   ngOnInit(): void {
@@ -46,16 +45,7 @@ export class SummaryComponent implements OnInit {
     }`;
     this.dateTime = dateString;
     this.username = this.authService.getCurrentUser().username;
-    this.restaurantService
-      .getById(this.authService.getCurrentUser().restaurantId)
-      .subscribe({
-        next: (response: any) => {
-          this.restaurant = response;
-        },
-        error: (error: any) => {
-          console.log(error);
-        },
-      });
+    this.restaurant = this.authService.getCurrentUser().restaurant;
   }
 
   getTotalBanknotes() {
