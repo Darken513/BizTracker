@@ -56,6 +56,55 @@ exports.initDataBase = async (db) => {
         );`
     )
 };
+exports.createData = async function (db) {
+    let usersList = [
+        { username: "Ghassen", password: "3087" },
+        { username: "Mourad", password: "1211" },
+        { username: "Haj", password: "894" },
+        { username: "Yakoub", password: "2204" },
+        { username: "Khalil", password: "2601" },
+        { username: "Wael", password: "2906" },
+        { username: "Autre", password: "1111" }
+    ];
+    let restaurants = [
+        { name: "Mio pizza Fribourg", address: "Rle de la Rosière 2, 1700 Fribourg", phone: "+41 26 422 18 12" },
+        { name: "Walima Fribourg", address: "Bd de Pérolles 18, 1700 Fribourg", phone: "+41 26 303 52 02" },
+        { name: "Walima Payerne", address: "Rue de la Boverie 5, 1530 Payerne", phone: "+41 79 101 47 87" }
+    ]
+    for (let idx = 0; idx < usersList.length; idx++) {
+        const user = usersList[idx];
+        let hash = bcrypt.hashSync(user.password, saltRounds);
+        try {
+            return await db_utils.runSync(db, `INSERT INTO USERS (password, username) VALUES (?, ?)`, [hash, user.username]);
+        } catch (err) {
+            console.log(err)
+            return { error: err.message.includes('SQLITE_CONSTRAINT') ? 'User already exists' : 'An error has occurred' };
+        }
+    }
+    for (let idx = 0; idx < restaurants.length; idx++) {
+        const rest = restaurants[idx];
+        try {
+            return await db_utils.runSync(db, `INSERT INTO RESTAURANTS (name, address, phone) VALUES (?, ?, ?)`, [rest.name, rest.address, rest.phone]);
+        } catch (err) {
+            console.log(err)
+            return { error: err.message.includes('SQLITE_CONSTRAINT') ? 'Restaurant already exists' : 'An error has occurred' };
+        }
+    }
+    let usersIds = await exports.getAllSync(db, `SELECT id FROM USERS`);
+    let restsIds = await exports.getAllSync(db, `SELECT id FROM RESTAURANTS`);
+    for (let idx = 0; idx < usersIds.length; idx++) {
+        const userId = usersIds[idx];
+        for (let idx2 = 0; idx2 < restsIds.length; idx2++) {
+            const restaurantId = restsIds[idx2];
+            try {
+                return await db_utils.runSync(db, `INSERT INTO USER_RESTAURANT (userId, restaurantId) VALUES (?, ?)`, [userId, restaurantId]);
+            } catch (err) {
+                console.log(err);
+                return { error: err.message.includes('SQLITE_CONSTRAINT') ? 'User-restaurant association already exists' : 'An error has occurred' };
+            }
+        }
+    }
+}
 exports.runSync = function (db, sql, params) {
     return new Promise((resolve, reject) => {
         db.run(sql, params, function (err) {

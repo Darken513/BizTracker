@@ -27,7 +27,7 @@ export class CashRegisterHandlerComponent implements OnInit {
   }
 
   calculateNextEmployeeValues(ownedMoney: number[]): number[] {
-    let toreturn = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    let toreturn = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     let totalOwned = ownedMoney.reduce((toret, curr, idx) => {
       toret += curr * this.CURRENCY_VALUES[idx]
       return toret;
@@ -65,7 +65,7 @@ export class CashRegisterHandlerComponent implements OnInit {
             toreturn[idx] += ownedCoins;
           } else {
             ownedMoney[idx] = ownedCoins - toFill;
-            toreturn[idx] += ownedCoins - toFill;
+            toreturn[idx] += toFill;
           }
           totalLeft = this.defaultTotal - toreturn.reduce((toret, curr, idx) => {
             toret += curr * this.CURRENCY_VALUES[idx]
