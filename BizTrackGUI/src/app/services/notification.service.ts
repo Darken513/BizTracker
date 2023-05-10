@@ -15,7 +15,7 @@ export class NotificationService {
     notifDiv?.appendChild(notifBtn)
     setTimeout(() => {
       notifDiv.remove()
-    }, 2500)
+    }, 3500)
   }
   private createNotifDiv(title: string): Element {
     let notificationDiv = document.createElement('div');

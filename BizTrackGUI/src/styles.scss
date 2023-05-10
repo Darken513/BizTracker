@@ -24,9 +24,10 @@ body {
     display: block;
     position: absolute;
     width: 230px;
+    z-index: 99;
     top: -150px;
     right: 20px;
-    opacity: 0.8;
+    opacity: 0.95;
     border-radius: 15px;
     animation-name: slideinTop;
     animation-duration: 0.85s;
@@ -35,6 +36,7 @@ body {
 }
 
 #notification-container {
+    z-index: 99;
     .notification.error {
         background: #ff7466;
     }
@@ -49,12 +51,12 @@ body {
 
     .notification {
         p.body {
-            font-size: 0.85rem;
+            font-size: 1rem;
             margin-bottom: 5px;
         }
 
         h3.title {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 400;
         }
 
@@ -72,7 +74,7 @@ body {
     overflow: auto;
     height: 100%;
     width: 100%;
-    padding: 15px 50px;
+    padding: 1rem 4rem;
 
     h1.title {
         font-weight: 500;
@@ -111,7 +113,7 @@ body {
             h1 {
                 font-weight: 300;
                 margin: 2px;
-                font-size: 1.5rem;
+                font-size: 1.25rem;
                 background-color: #7bb3b3;
                 padding: 5px 10px;
                 border-radius: 10px;
@@ -183,9 +185,46 @@ body {
     }
 }
 
-@media screen and (max-width: 575px){
-    :root{
-        font-size: 12px;
+@media screen and (max-width: 575px) {
+    :root {
+        font-size: 12px !important;
+    }
+
+    .inner-container {
+        padding: 1rem !important;
+    }
+
+    .custom-card.cardBoxWrapper:not(.multi) {
+        height: 240px !important;
+    }
+
+    .custom-card:not(.cardBoxWrapper) {
+        .currencuDetails {
+            width: calc(100% - 70px) !important;
+        }
+
+        .currencyPic-wrapper {
+            width: 70px !important;
+
+            .currencyPic {
+                width: 65px !important;
+            }
+        }
+    }
+
+    .custom-card.card-total {
+        width: 200px !important;
+    }
+
+    .btn-submit:not(.valider) {
+        width: 200px !important;
+        margin-left: 0 !important;
+    }
+    .body-card-inner.no-padding {
+        padding: 10px !important;
+    }
+    .navigationBtn {
+        width: 45px !important;
     }
 }
 

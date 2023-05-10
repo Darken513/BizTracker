@@ -39,7 +39,10 @@ export class BilanWrapperComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  onPageIdxChange(event:any){
+    this.page_idx = event;
+    console.log(this.page_idx);
+  }
   logout(){
     localStorage.clear();
     this.route.navigate(["/home"])

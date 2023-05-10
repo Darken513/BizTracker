@@ -4,9 +4,11 @@
     margin: auto;
     padding: 3px;
     margin-bottom: 5px;
-    h1{
+
+    h1 {
         text-align: center;
     }
+
     .custom-card-body .body-card-inner {
         position: static;
         height: 90px;
@@ -15,7 +17,9 @@
         width: 100%;
         padding: 5px 15px;
     }
-    input{
+
+    input,
+    select {
         width: 100%;
         height: 35px;
         border-radius: 0;
@@ -24,7 +28,8 @@
         border-radius: 10px;
         text-align: center;
     }
-    .charge-wrapper{
+
+    .charge-wrapper {
         .deleteCharge {
             position: relative;
             top: -2px;
@@ -35,7 +40,8 @@
             color: white;
             border-radius: 10px;
         }
-        h1{
+
+        h1 {
             display: inline-block;
             font-size: 1rem;
             margin-top: 5px;
@@ -48,29 +54,37 @@
             margin-bottom: 0;
             padding: 7px;
         }
-        input{
+
+        input {
             width: calc(50% - 40px);
         }
     }
-    .newcharge-wrapper{
+
+    .newcharge-wrapper {
         width: 100%;
-        input{
+
+        input,
+        select {
             width: calc(50% - 22.5px)
         }
-        input:last-of-type{
+
+        input:last-of-type {
             margin-left: 5px;
         }
-        .addCharge{
+
+        .addCharge {
             margin-left: 5px;
             width: 35px;
             height: 35px;
             border: 1px solid #addb76;
             background-color: #addb76;
-            border-radius: 10px;;
+            border-radius: 10px;
+            ;
         }
     }
 }
-.btn-submit{
+
+.btn-submit {
     display: block;
     width: 230px;
     height: 46px;
@@ -83,15 +97,18 @@
     margin-top: 15px;
     box-shadow: 0 3px 8px black;
 }
+
 .custom-card.cardBoxWrapper {
     height: 280px;
     margin-top: 0;
     margin-bottom: 0;
-    h1.mainTitle{
+
+    h1.mainTitle {
         margin: 0;
         padding-top: 15px;
     }
-    .custom-card-body{
+
+    .custom-card-body {
         background: white;
     }
 }

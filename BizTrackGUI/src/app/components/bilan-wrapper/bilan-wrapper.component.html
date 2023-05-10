@@ -5,8 +5,8 @@
     </div>
     <div class="wrapper-body">
         <app-banknote-summary *ngIf="page_idx==0" [banknotes]="banknotes" (onSubmit)="page_idx=1"></app-banknote-summary>
-        <app-bilan *ngIf="page_idx==1" [bilanObj]="bilanObj" (onSubmit)="page_idx=2"></app-bilan>
-        <app-cash-register-handler *ngIf="page_idx==2" [banknotesObj]="banknotes" (onSubmit)="coinsToLeave=$event; page_idx=3"></app-cash-register-handler>
-        <app-summary *ngIf="page_idx==3" [bilanObj]="bilanObj" [banknotesObj]="banknotes" [coinsToLeave]="coinsToLeave" (onSubmit)="page_idx=3"></app-summary>
+        <app-bilan *ngIf="page_idx>=1 && page_idx<4" [bilanObj]="bilanObj" [page_idx]="page_idx" (pageIdx_change)="onPageIdxChange($event)" (onSubmit)="page_idx=4"></app-bilan>
+        <app-cash-register-handler *ngIf="page_idx==4" [banknotesObj]="banknotes" (onSubmit)="coinsToLeave=$event; page_idx=5"></app-cash-register-handler>
+        <app-summary *ngIf="page_idx==5" [bilanObj]="bilanObj" [banknotesObj]="banknotes" [coinsToLeave]="coinsToLeave" (onSubmit)="page_idx=5"></app-summary>
     </div>
 </div>
