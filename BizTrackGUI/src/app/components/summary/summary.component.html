@@ -50,7 +50,7 @@
                             <td>{{total.value}} CHF</td>
                         </tr>
                         <tr style="background-color: #2065a810;">
-                            <td style="font-weight: 600;">Total charges</td>
+                            <td style="font-weight: 600;">Total commission</td>
                             <td></td>
                             <td style="font-weight: 600;">{{getTotalCharges()}} CHF</td>
                         </tr>
@@ -59,10 +59,25 @@
                             <td>{{charge.label}}</td>
                             <td>{{charge.value}} CHF</td>
                         </tr>
-                        <tr style="background-color: #ffd2d250;">
-                            <td>{{advance.label}}</td>
+                        <tr style="background-color: #2065a810;">
+                            <td style="font-weight: 600;">Total avance employé</td>
                             <td></td>
+                            <td style="font-weight: 600;">{{getTotalAdvances()}} CHF</td>
+                        </tr>
+                        <tr style="background-color: #eeeeee50;" *ngFor="let advance of bilanObj.advances">
+                            <td></td>
+                            <td>{{advance.label}}</td>
                             <td>{{advance.value}} CHF</td>
+                        </tr>
+                        <tr style="background-color: #2065a810;">
+                            <td style="font-weight: 600;">Total paiement sans facture</td>
+                            <td></td>
+                            <td style="font-weight: 600;">{{getTotalNonFactures()}} CHF</td>
+                        </tr>
+                        <tr style="background-color: #eeeeee50;" *ngFor="let nFacture of bilanObj.nonFactures">
+                            <td></td>
+                            <td>{{nFacture.label}}</td>
+                            <td>{{nFacture.value}} CHF</td>
                         </tr>
                         <tr style="position:relative; top: 10px;">
                             <td></td>

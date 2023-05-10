@@ -21,18 +21,16 @@ export class SummaryComponent implements OnInit {
   public set bilanObj(v: any) {
     this._bilanObj = v;
     this.fields = [v.website, v.tpe1, v.tpe2];
-    this.advance = v.advance;
   }
   public get bilanObj(): any {
     return this._bilanObj;
   }
 
   fields: Array<FieldToFill> = [];
-  advance: FieldToFill = new FieldToFill('advance', 'Total advance', '');
   constructor(
     private authService: AuthService,
     private restaurantService: RestaurantService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const date = new Date();
@@ -41,9 +39,11 @@ export class SummaryComponent implements OnInit {
     const year = date.getFullYear();
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    const dateString = `${month < 9 ? '0' + month : month}/${day < 9 ? '0' + day : day
-      }/${year} ${hours < 9 ? '0' + hours : hours}:${minutes < 9 ? '0' + minutes : minutes
-      }`;
+    const dateString = `${month < 9 ? '0' + month : month}/${
+      day < 9 ? '0' + day : day
+    }/${year} ${hours < 9 ? '0' + hours : hours}:${
+      minutes < 9 ? '0' + minutes : minutes
+    }`;
     this.dateTime = dateString;
     this.username = this.authService.getCurrentUser().username;
     this.restaurantService
@@ -63,12 +63,24 @@ export class SummaryComponent implements OnInit {
       (res: number, cur: any, idx: number) =>
         res +
         parseInt(cur.value ? cur.value : '0') *
-        (parseInt(cur.nbr ? cur.nbr : '0') - this.coinsToLeave[idx]),
+          (parseInt(cur.nbr ? cur.nbr : '0') - this.coinsToLeave[idx]),
       0
     );
   }
   getTotalCharges() {
     return this.bilanObj.charges.reduce(
+      (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
+      0
+    );
+  }
+  getTotalAdvances() {
+    return this.bilanObj.advances.reduce(
+      (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
+      0
+    );
+  }
+  getTotalNonFactures() {
+    return this.bilanObj.nonFactures.reduce(
       (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
       0
     );
@@ -84,7 +96,14 @@ export class SummaryComponent implements OnInit {
         (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
         0
       ) -
-      parseInt(this.advance.value ? this.advance.value : '0')
+      this.bilanObj.advances.reduce(
+        (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
+        0
+      ) -
+      this.bilanObj.nonFactures.reduce(
+        (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
+        0
+      )
     );
   }
   printPage() {

@@ -1,12 +1,14 @@
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 exports.initDataBase = async (db) => {
     await exports.runSync(db, `
         CREATE TABLE IF NOT EXISTS RESTAURANTS (
             id INTEGER PRIMARY KEY,
-            name TEXT NOT NULL,
-            email TEXT NOT NULL UNIQUE,
-            address TEXT NOT NULL,
+            name TEXT NOT NULL UNIQUE,
+            email TEXT,
+            address TEXT,
             img TEXT,
-            phone TEXT NOT NULL,
+            phone TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );`
     )
@@ -14,7 +16,7 @@ exports.initDataBase = async (db) => {
         CREATE TABLE IF NOT EXISTS USERS (
             id INTEGER PRIMARY KEY,
             password TEXT NOT NULL,
-            email TEXT NOT NULL UNIQUE,
+            email TEXT,
             username TEXT NOT NULL UNIQUE,
             address TEXT,
             phone TEXT,
@@ -67,27 +69,25 @@ exports.createData = async function (db) {
         { username: "Autre", password: "1111" }
     ];
     let restaurants = [
-        { name: "Mio pizza Fribourg", address: "Rle de la Rosière 2, 1700 Fribourg", phone: "+41 26 422 18 12" },
-        { name: "Walima Fribourg", address: "Bd de Pérolles 18, 1700 Fribourg", phone: "+41 26 303 52 02" },
-        { name: "Walima Payerne", address: "Rue de la Boverie 5, 1530 Payerne", phone: "+41 79 101 47 87" }
+        { name: "Mio pizza Fribourg", img: "./../../../assets/MioPizzaFrigbourg.png", address: "Rle de la Rosière 2, 1700 Fribourg", phone: "+41 26 422 18 12" },
+        { name: "Walima Fribourg", img: "./../../../assets/walimaFrigbourg.png", address: "Bd de Pérolles 18, 1700 Fribourg", phone: "+41 26 303 52 02" },
+        { name: "Walima Payerne", img: "./../../../assets/walimaPayerne.png", address: "Rue de la Boverie 5, 1530 Payerne", phone: "+41 79 101 47 87" }
     ]
     for (let idx = 0; idx < usersList.length; idx++) {
         const user = usersList[idx];
         let hash = bcrypt.hashSync(user.password, saltRounds);
         try {
-            return await db_utils.runSync(db, `INSERT INTO USERS (password, username) VALUES (?, ?)`, [hash, user.username]);
+            await exports.runSync(db, `INSERT INTO USERS (password, username) VALUES (?, ?)`, [hash, user.username]);
         } catch (err) {
             console.log(err)
-            return { error: err.message.includes('SQLITE_CONSTRAINT') ? 'User already exists' : 'An error has occurred' };
         }
     }
     for (let idx = 0; idx < restaurants.length; idx++) {
         const rest = restaurants[idx];
         try {
-            return await db_utils.runSync(db, `INSERT INTO RESTAURANTS (name, address, phone) VALUES (?, ?, ?)`, [rest.name, rest.address, rest.phone]);
+            await exports.runSync(db, `INSERT INTO RESTAURANTS (name, address, phone, img) VALUES (?, ?, ?, ?)`, [rest.name, rest.address, rest.phone, rest.img]);
         } catch (err) {
             console.log(err)
-            return { error: err.message.includes('SQLITE_CONSTRAINT') ? 'Restaurant already exists' : 'An error has occurred' };
         }
     }
     let usersIds = await exports.getAllSync(db, `SELECT id FROM USERS`);
@@ -97,13 +97,13 @@ exports.createData = async function (db) {
         for (let idx2 = 0; idx2 < restsIds.length; idx2++) {
             const restaurantId = restsIds[idx2];
             try {
-                return await db_utils.runSync(db, `INSERT INTO USER_RESTAURANT (userId, restaurantId) VALUES (?, ?)`, [userId, restaurantId]);
+                await exports.runSync(db, `INSERT INTO USER_RESTAURANT (userId, restaurantId) VALUES (?, ?)`, [userId.id, restaurantId.id]);
             } catch (err) {
                 console.log(err);
-                return { error: err.message.includes('SQLITE_CONSTRAINT') ? 'User-restaurant association already exists' : 'An error has occurred' };
             }
         }
     }
+    console.log("all done !");
 }
 exports.runSync = function (db, sql, params) {
     return new Promise((resolve, reject) => {

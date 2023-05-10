@@ -183,6 +183,12 @@ body {
     }
 }
 
+@media screen and (max-width: 575px){
+    :root{
+        font-size: 12px;
+    }
+}
+
 @keyframes move-leftright {
     0% {
         margin-left: -45px;

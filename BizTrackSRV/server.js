@@ -25,7 +25,7 @@ app.use('/charges', chargesRouter);
 
 async function init() {
   await db_utils.initDataBase(db);
-  await db_utils.createData(db)
+  //await db_utils.createData(db)
 }
 
 init();

@@ -5,9 +5,9 @@
 .navigationBtn {
     background-color: #87b37b;
     padding: 2.5px 15px;
-    margin-top: 5px;
-    width: 85px;
-    height: 50px;
+    margin-top: 0.5rem;
+    width: 65px;
+    height: 3.2rem;
     border: none;
     border-radius: 30px;
     box-shadow: 0 0 5px #333;
@@ -18,7 +18,7 @@
 .header-div {
     position: fixed;
     top: 0;
-    height: 60px;
+    height: 4.1rem;
     width: 100%;
     background-color: rgb(9 96 108 / 80%);
     z-index: 99;
@@ -27,7 +27,7 @@
         user-select: none;
         cursor: pointer;
         font-size: 1.8rem;
-        padding: 13px;
+        padding: 1rem;
         font-weight: 300;
         padding-right: 30px;
         color: white;

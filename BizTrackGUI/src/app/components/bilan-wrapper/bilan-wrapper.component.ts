@@ -30,7 +30,8 @@ export class BilanWrapperComponent implements OnInit {
     totalJusteat: new FieldToFill('totalJusteat', "Total Justeat en espèce", ''),
     tpe1: new FieldToFill('totalTpe1', "Total TPE1", ''),
     tpe2: new FieldToFill('totalTpe2', "Total TPE2", ''),
-    advance: new FieldToFill('advance', "Total advance", ''),
+    nonFactures: [],
+    advances: [],
     charges: []
   };
 
