@@ -96,3 +96,4 @@ export class BilanComponent implements OnInit {
 
 // to-do
 // send mail & save the details as a single json somewhere -> could help in future work
+// you may wanna add a go back button for the user login & user select => restaurant

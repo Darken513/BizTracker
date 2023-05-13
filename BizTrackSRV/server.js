@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRouter = require('./routers/auth.router');
+const summaryRouter = require('./routers/summary.router');
 const restaurantRouter = require('./routers/restaurant.router');
 const employeesRouter = require('./routers/employees.router');
 const banknotesummaryRouter = require('./routers/banknotesummary.router');
@@ -18,6 +19,7 @@ app.use(cors());
 
 app.use(bodyParser.json());
 app.use('/auth', authRouter);
+app.use('/summary', summaryRouter);
 app.use('/restaurant', restaurantRouter);
 app.use('/employee', employeesRouter);
 app.use('/banknotesummary', banknotesummaryRouter);

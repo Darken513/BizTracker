@@ -47,7 +47,7 @@
                         <tr *ngFor="let total of fields">
                             <td>{{total.label}}</td>
                             <td></td>
-                            <td>{{total.value}} CHF</td>
+                            <td>{{getTotalFieldVal(total.value)}} CHF</td>
                         </tr>
                         <tr style="background-color: #2065a810;">
                             <td style="font-weight: 600;">Total commission</td>
@@ -90,8 +90,8 @@
 
             <div class="custom-card-footer no-print">
                 <div class="invoice-icon">
-                    <button class="no-print is-summary" (click)="printPage()">Imprimer le rapport</button>
-                    <button class="no-print is-summary saveconf" (click)="SaveConf()">Valider le rapport</button>
+                    <!-- <button class="no-print is-summary" (click)="printPage()">Imprimer le rapport</button> -->
+                    <button [disabled]="!canSubmit" class="no-print is-summary saveconf" (click)="SaveConf()">Valider le rapport</button>
                 </div>
                 <div class="invoice-details">
                     <h2><i style="margin-right: 10px;" class="fa fa-money" aria-hidden="true"> </i> TOTAL</h2>

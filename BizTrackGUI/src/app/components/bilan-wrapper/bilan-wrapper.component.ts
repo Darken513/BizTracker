@@ -41,7 +41,6 @@ export class BilanWrapperComponent implements OnInit {
   }
   onPageIdxChange(event:any){
     this.page_idx = event;
-    console.log(this.page_idx);
   }
   logout(){
     localStorage.clear();

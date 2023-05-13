@@ -2,7 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Currency } from 'src/app/Models/Currency';
 import { FieldToFill } from 'src/app/Models/FieldToFill';
 import { AuthService } from 'src/app/services/auth.service';
-import { RestaurantService } from 'src/app/services/restaurant.service';
+import { SummaryService } from 'src/app/services/summary.service';
+import { NotificationService } from '../../services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary',
@@ -25,11 +27,14 @@ export class SummaryComponent implements OnInit {
   public get bilanObj(): any {
     return this._bilanObj;
   }
-
+  canSubmit: boolean = true;
   fields: Array<FieldToFill> = [];
   constructor(
     private authService: AuthService,
-  ) {}
+    private router: Router,
+    private summaryService: SummaryService,
+    private notificationService: NotificationService,
+  ) { }
 
   ngOnInit(): void {
     const date = new Date();
@@ -38,75 +43,112 @@ export class SummaryComponent implements OnInit {
     const year = date.getFullYear();
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    const dateString = `${month < 9 ? '0' + month : month}/${
-      day < 9 ? '0' + day : day
-    }/${year} ${hours < 9 ? '0' + hours : hours}:${
-      minutes < 9 ? '0' + minutes : minutes
-    }`;
+    const dateString = `${month < 9 ? '0' + month : month}/${day < 9 ? '0' + day : day
+      }/${year} ${hours < 9 ? '0' + hours : hours}:${minutes < 9 ? '0' + minutes : minutes
+      }`;
     this.dateTime = dateString;
     this.username = this.authService.getCurrentUser().username;
     this.restaurant = this.authService.getCurrentUser().restaurant;
   }
-
+  getTotalFieldVal(total: any) {
+    return total.toFixed(2)
+  }
   getTotalBanknotes() {
     return this.banknotesObj.reduce(
       (res: number, cur: any, idx: number) =>
         res +
         parseInt(cur.value ? cur.value : '0') *
-          (parseInt(cur.nbr ? cur.nbr : '0') - this.coinsToLeave[idx]),
+        (parseInt(cur.nbr ? cur.nbr : '0') - this.coinsToLeave[idx]),
       0
-    );
+    ).toFixed(2);
   }
   getTotalCharges() {
     return this.bilanObj.charges.reduce(
       (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
       0
-    );
+    ).toFixed(2);
   }
   getTotalAdvances() {
     return this.bilanObj.advances.reduce(
       (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
       0
-    );
+    ).toFixed(2);
   }
   getTotalNonFactures() {
     return this.bilanObj.nonFactures.reduce(
       (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
       0
-    );
+    ).toFixed(2);
   }
   getTotalIncome() {
     return (
-      this.getTotalBanknotes() +
+      parseFloat(this.getTotalBanknotes()) +
       this.fields.reduce(
         (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
         0
-      ) -
-      this.bilanObj.charges.reduce(
-        (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
-        0
-      ) -
-      this.bilanObj.advances.reduce(
-        (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
-        0
-      ) -
-      this.bilanObj.nonFactures.reduce(
-        (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
-        0
-      )
+      ) - parseFloat(this.getTotalCharges()) - parseFloat(this.getTotalAdvances()) - parseFloat(this.getTotalNonFactures())
     );
   }
   printPage() {
     window.print();
   }
+  getBanknotesDetails() {
+    let toret = [];
+    for (let idx = 0; idx < this.banknotesObj.length; idx++) {
+      const banknote = this.banknotesObj[idx];
+      let topush = {
+        value: banknote.value,
+        initial: banknote.nbr,
+        kept: this.coinsToLeave[idx],
+        finalValue: banknote.value *
+          (parseInt(banknote.nbr ? banknote.nbr : '0') - this.coinsToLeave[idx])
+      }
+      toret.push(topush)
+    }
+    return toret
+  }
   SaveConf() {
-    this.onSubmit.emit(true);
+    let data = {
+      restaurantName: this.restaurant.name,
+      username: this.username,
+      dateTime: this.dateTime,
+      banknotesDetails: this.getBanknotesDetails(), //[{ value: '', initial: '', kept: '', finalValue: '' }]
+      totalBanknotesVal: this.getTotalBanknotes(),
+      websiteTotal: this.fields.find((col) => col.fieldName == "totalWebsite")?.value,
+      tpe1Total: this.fields.find((col) => col.fieldName == "totalTpe1")?.value,
+      tpe2Total: this.fields.find((col) => col.fieldName == "totalTpe2")?.value,
+      chargesTotal: this.getTotalCharges(),
+      chargesDetails: this.bilanObj.charges,
+      advancesTotal: this.getTotalAdvances(),
+      advancesDetails: this.bilanObj.advances,
+      nonFacturesTotal: this.getTotalNonFactures(),
+      nonFacturesDetails: this.bilanObj.nonFactures,
+      totalRes: this.getTotalIncome()
+    }
+    this.canSubmit = false;
+    this.summaryService.save(data).subscribe({
+      next: (next) => {
+        if (next.done) {
+          this.notificationService.showNotification('success','Le rapport a été envoyé avec succès')
+          setTimeout(() => {
+            this.authService.logout();
+            this.router.navigate(['/home']);
+          }, 1500);
+          return;
+        }
+        if (next.error) {
+          this.notificationService.showNotification('error',"une erreur s'est produite")
+        }
+      },
+      error: (err) => {
+      }
+    })
   }
   getBanknoteTotal(banknote: any, idx: number) {
     return (
       banknote.value *
       (parseInt(banknote.nbr ? banknote.nbr : '0') - this.coinsToLeave[idx])
-    );
+    ).toFixed(2);
   }
   onKeyPress(event: any) {
     const pattern = /[0-9]/;
