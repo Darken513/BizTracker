@@ -8,7 +8,7 @@ const employeesRouter = require('./routers/employees.router');
 const banknotesummaryRouter = require('./routers/banknotesummary.router');
 const chargesRouter = require('./routers/charges.router');
 const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database("./database.db");
+const db = new sqlite3.Database(__dirname+"/database.db"); //depends on the running app path
 const db_utils = require('./services/database')
 const port = process.env.PORT || 80;
 

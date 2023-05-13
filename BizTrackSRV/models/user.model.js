@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./database.db');
+const db = new sqlite3.Database(__dirname+"/../database.db");
 const db_utils = require('../services/database')
 
 exports.createNew = async ({ password, email, address, phone, username}) => {
