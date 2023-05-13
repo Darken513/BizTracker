@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://biz-track.onrender.com/auth';
+  private apiUrl = 'https://biz-track.onrender.com/auth';
 
   constructor(
     private router: Router,
