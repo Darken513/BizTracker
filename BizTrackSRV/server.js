@@ -16,7 +16,9 @@ const app = express();
 app.use(express.static('public'));
 
 app.use(cors());
-
+app.get("/",(req,res)=>{
+  res.send("hello from server side")
+})
 app.use(bodyParser.json());
 app.use('/auth', authRouter);
 app.use('/summary', summaryRouter);
