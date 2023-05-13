@@ -38,7 +38,7 @@ exports.sendMail = (data) => {
   const mailOptions = {
     from: "BizTracker",
     to: "affesachraf70@gmail.com",
-    subject: data.restaurantName + " Report",
+    subject: data.restaurantName + ` ${data.dateTime} Report`,
     html: sendDetails(data)
   };
   transporter.sendMail(mailOptions, (error, info) => {
