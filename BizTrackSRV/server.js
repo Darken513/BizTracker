@@ -13,12 +13,8 @@ const db_utils = require('./services/database')
 const port = process.env.PORT || 80;
 
 const app = express();
-app.use(express.static('public'));
-
+app.use(express.static(__dirname+"/public"));
 app.use(cors());
-app.get("/",(req,res)=>{
-  res.send("hello from server side")
-})
 app.use(bodyParser.json());
 app.use('/auth', authRouter);
 app.use('/summary', summaryRouter);
@@ -33,7 +29,7 @@ async function init() {
 }
 
 init();
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(port, () => {console.log(`Server started on port ${port}`);console.log(__dirname+"/public");});
 process.on('uncaughtException', (error) => {
   console.error('Error: ', error);
 });
