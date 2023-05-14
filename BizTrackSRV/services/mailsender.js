@@ -37,8 +37,7 @@ function sendDetails(data) {
 exports.sendMail = (data) => {
   const mailOptions = {
     from: "BizTracker",
-    to: 'affesachraf70@gmail.com',/* "ghassen.hentati@hotmail.com",
-    cc: 'affesachraf70@gmail.com', */
+    to: 'ghassen.hentati@hotmail.com',
     subject: "Rapport Journalier " + data.restaurantName + ` ${data.dateTime}`,
     html: sendDetails(data)
   };
