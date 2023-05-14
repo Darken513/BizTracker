@@ -19,8 +19,8 @@ export class AdminPannelComponent implements OnInit {
   //todo banknotes should be a part of a resturant data not a static list
   banknotes: Array<Currency> = [
     new Currency('../../assets/005CHF.png', '0.05 CHF', 0.05, ''),
-    new Currency('../../assets/020CHF.png', '0.10 CHF', 0.1, ''),
-    new Currency('../../assets/010CHF.png', '0.20 CHF', 0.2, ''),
+    new Currency('../../assets/010CHF.png', '0.10 CHF', 0.1, ''),
+    new Currency('../../assets/020CHF.png', '0.20 CHF', 0.2, ''),
     new Currency('../../assets/05CHF.png', '0.5 CHF', 0.5, ''),
     new Currency('../../assets/1CHF.png', '1 CHF', 1, ''),
     new Currency('../../assets/2CHF.png', '2 CHF', 2, ''),
