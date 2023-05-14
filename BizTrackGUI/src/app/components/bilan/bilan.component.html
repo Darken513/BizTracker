@@ -35,48 +35,59 @@
             <div class="body-card-inner" [ngStyle]="{'height':getArrayHeight(bilanObj.charges)}">
                 <h1>total commission : {{getTotalFromArray(bilanObj.charges)}} CHF</h1>
                 <div class="charge-wrapper" *ngFor="let charge of bilanObj.charges; let idx = index;">
-                    <button class="deleteCharge" (click)="deleteFromArray(bilanObj.charges, idx)"><i class="fa fa-times"></i></button>
+                    <button class="deleteCharge" (click)="deleteFromArray(bilanObj.charges, idx)"><i
+                            class="fa fa-times"></i></button>
                     <h1>{{charge.label}}</h1>
                     <input type="number" min="0" placeholder="0" name="{{charge.fieldName+'_charge'}}"
                         (keypress)="onKeyPress($event)" [(ngModel)]="charge.value">
                 </div>
                 <div class="newcharge-wrapper">
-                    <input type="text" placeholder="Nom du fournisseur" name="newCharge_label" [(ngModel)]="newCharge.label">
+                    <input type="text" placeholder="Nom du fournisseur" name="newCharge_label"
+                        [(ngModel)]="newCharge.label">
                     <input type="number" min="0" placeholder="0" placeholder="Montant" name="newCharge_value"
                         (keypress)="onKeyPress($event)" [(ngModel)]="newCharge.value">
-                    <button class="addCharge" (click)="addToArray(bilanObj.charges, newCharge)"><i class="fa fa-plus"></i></button>
+                    <button class="addCharge" (click)="addToArray(bilanObj.charges, newCharge)"><i
+                            class="fa fa-plus"></i></button>
                 </div>
             </div>
-            <div class="body-card-inner" [ngStyle]="{'height':getArrayHeight(bilanObj.advances)}">
+            <div class="body-card-inner" [ngStyle]="{'height':getArrayHeight(bilanObj.advances, true)}">
                 <h1>Total avance employé : {{getTotalFromArray(bilanObj.advances)}} CHF</h1>
                 <div class="charge-wrapper" *ngFor="let advance of bilanObj.advances; let idx = index;">
-                    <button class="deleteCharge" (click)="deleteFromArray(bilanObj.advances, idx)"><i class="fa fa-times"></i></button>
+                    <button class="deleteCharge" (click)="deleteFromArray(bilanObj.advances, idx)"><i
+                            class="fa fa-times"></i></button>
                     <h1>{{advance.label}}</h1>
                     <input type="number" min="0" placeholder="0" name="{{advance.fieldName+'_charge'}}"
                         (keypress)="onKeyPress($event)" [(ngModel)]="advance.value">
                 </div>
                 <div class="newcharge-wrapper">
-                    <select [(ngModel)]="newAdvance.label">
+                    <select [ngStyle]="{'width':newAdvance.label == 'Autre' ? '100%':'calc(50% - 22.5px)'}"
+                        [(ngModel)]="newAdvance.label">
                         <option value="{{user}}" *ngFor="let user of users">{{user}}</option>
                     </select>
+                    <input *ngIf="newAdvance.label == 'Autre'" type="text" placeholder="Nom de l'employé"
+                        name="newChargeAutre_value" [(ngModel)]="newAdvanceAutre">
                     <input type="number" min="0" placeholder="0" placeholder="Montant" name="newCharge_value"
                         (keypress)="onKeyPress($event)" [(ngModel)]="newAdvance.value">
-                    <button class="addCharge" (click)="addToArray(bilanObj.advances, newAdvance)"><i class="fa fa-plus"></i></button>
+                    <button class="addCharge" (click)="addToArray(bilanObj.advances, newAdvance, true)"><i
+                            class="fa fa-plus"></i></button>
                 </div>
             </div>
             <div class="body-card-inner" [ngStyle]="{'height':getArrayHeight(bilanObj.nonFactures)}">
                 <h1>Total paiement sans facture : {{getTotalFromArray(bilanObj.nonFactures)}} CHF</h1>
                 <div class="charge-wrapper" *ngFor="let advance of bilanObj.nonFactures; let idx = index;">
-                    <button class="deleteCharge" (click)="deleteFromArray(bilanObj.nonFactures, idx)"><i class="fa fa-times"></i></button>
+                    <button class="deleteCharge" (click)="deleteFromArray(bilanObj.nonFactures, idx)"><i
+                            class="fa fa-times"></i></button>
                     <h1>{{advance.label}}</h1>
                     <input type="number" min="0" placeholder="0" name="{{advance.fieldName+'_charge'}}"
                         (keypress)="onKeyPress($event)" [(ngModel)]="advance.value">
                 </div>
                 <div class="newcharge-wrapper">
-                    <input type="text" placeholder="Nom du destinataire" name="newCharge_label" [(ngModel)]="newNfracture.label">
+                    <input type="text" placeholder="Nom du destinataire" name="newCharge_label"
+                        [(ngModel)]="newNfracture.label">
                     <input type="number" min="0" placeholder="0" placeholder="Montant" name="newCharge_value"
                         (keypress)="onKeyPress($event)" [(ngModel)]="newNfracture.value">
-                    <button class="addCharge" (click)="addToArray(bilanObj.nonFactures, newNfracture)"><i class="fa fa-plus"></i></button>
+                    <button class="addCharge" (click)="addToArray(bilanObj.nonFactures, newNfracture)"><i
+                            class="fa fa-plus"></i></button>
                 </div>
             </div>
         </div>

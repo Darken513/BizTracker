@@ -29,7 +29,7 @@ async function init() {
 }
 
 init();
-app.listen(port, () => {console.log(`Server started on port ${port}`);console.log(__dirname+"/public");});
+app.listen(port, () => {console.log(`Server started on port ${port}`);});
 process.on('uncaughtException', (error) => {
   console.error('Error: ', error);
 });

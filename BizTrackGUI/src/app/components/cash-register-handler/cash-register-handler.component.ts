@@ -25,7 +25,35 @@ export class CashRegisterHandlerComponent implements OnInit {
       return toret;
     }, 0);
   }
-
+  tryToReplace(totalDef: number, totalKept: number, idx: number, toret: Array<number>, ownedCoins: Array<number>): any {
+    if (ownedCoins[idx] == 0)
+      return { change: false, toreturn: toret };
+    if (totalKept + this.CURRENCY_VALUES[idx] < totalDef)
+      return { change: false, toreturn: toret };
+    totalKept += this.CURRENCY_VALUES[idx];
+    for (let subIdx = idx - 1; subIdx >= 0; subIdx--) {
+      const value = this.CURRENCY_VALUES[subIdx];
+      const coins = toret[subIdx];
+      const difference = Number((totalKept - totalDef).toFixed(2));
+      let toreduce = Math.floor(difference / value);
+      if (toreduce >= coins) {
+        toret[subIdx] = 0;
+        ownedCoins[subIdx] += coins;
+        totalKept -= coins * value;
+      } else {
+        toret[subIdx] = coins - toreduce;
+        ownedCoins[subIdx] += coins - toreduce;
+        totalKept -= toreduce * value;
+      }
+      if (totalKept == totalDef)
+        break;
+    }
+    if (totalKept == totalDef) {
+      toret[idx] += 1;
+      return { change: true, toreturn: toret, ownedCoins };
+    }
+    return { change: false, toreturn: toret };
+  }
   calculateNextEmployeeValues(ownedMoney: number[]): number[] {
     let toreturn = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     let totalOwned = ownedMoney.reduce((toret, curr, idx) => {
@@ -72,6 +100,20 @@ export class CashRegisterHandlerComponent implements OnInit {
             return toret;
           }, 0);
           tookAction = true;
+        }
+      }
+    }
+    if (totalLeft > 0) {
+      for (let idx = 1; idx < toreturn.length; idx++) {
+        let totalKept = toreturn.reduce((toret, curr, idx) => {
+          toret += curr * this.CURRENCY_VALUES[idx]
+          return toret;
+        }, 0);
+        let testRes = this.tryToReplace(this.defaultTotal, totalKept, idx, _.cloneDeep(toreturn), _.cloneDeep(ownedMoney))
+        if (testRes && testRes.change) {
+          toreturn = testRes.toreturn;
+          ownedMoney = testRes.ownedMoney;
+          break;
         }
       }
     }

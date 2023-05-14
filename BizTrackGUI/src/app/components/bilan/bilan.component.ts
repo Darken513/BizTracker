@@ -13,7 +13,7 @@ export class BilanComponent implements OnInit {
   @Output() onSubmit = new EventEmitter<any>();
   private _bilanObj: any;
   @Output() pageIdx_change = new EventEmitter<number>();
-  @Input() page_idx:number=1;
+  @Input() page_idx: number = 1;
   fields: Array<FieldToFill> = [];
   users: Array<string> = [];
 
@@ -29,6 +29,7 @@ export class BilanComponent implements OnInit {
 
   newCharge: any = { label: "", value: '' }
   newAdvance: any = { label: "", value: '' }
+  newAdvanceAutre = '';
   newNfracture: any = { label: "", value: '' }
 
   constructor(
@@ -38,16 +39,16 @@ export class BilanComponent implements OnInit {
 
   ngOnInit(): void {
     //to-do : this should by restaurant ( future work / refactor )
-    this.employeeService.getAll().subscribe((res)=>{
-      this.users = res.allEmployees.map((user:any)=>user.username)
+    this.employeeService.getAll().subscribe((res) => {
+      this.users = res.allEmployees.map((user: any) => user.username)
       this.newAdvance.label = this.users[0]
     })
   }
   getallChargesHeight() {
-    return 'calc(' + (parseFloat(this.getArrayHeight(this.bilanObj.charges)) + parseFloat(this.getArrayHeight(this.bilanObj.advances)) + parseFloat(this.getArrayHeight(this.bilanObj.nonFactures))) + "px + 5rem)"
+    return 'calc(' + (parseFloat(this.getArrayHeight(this.bilanObj.charges, true)) + parseFloat(this.getArrayHeight(this.bilanObj.advances)) + parseFloat(this.getArrayHeight(this.bilanObj.nonFactures))) + "px + 5rem)"
   }
-  getArrayHeight(array: Array<any>) {
-    return array.length * 40 + 95 + 'px'
+  getArrayHeight(array: Array<any>, isAdvance?: boolean) {
+    return array.length * 40 + 95 + (isAdvance && this.newAdvance.label == 'Autre' ? 40 : 0) + 'px'
   }
   getTotalFromArray(array: Array<any>) {
     return array.reduce(
@@ -55,32 +56,41 @@ export class BilanComponent implements OnInit {
       0
     );
   }
-  addToArray(array: Array<any>, newElt: any) {
+  addToArray(array: Array<any>, newElt: any, isAdvance?: boolean) {
     if (!newElt.label.trim() || !parseFloat(newElt.value ? newElt.value : '0')) {
-      //display error
+      return
+    }
+    if (!isAdvance || this.newAdvance.label != 'Autre') {
+      array.push(_.cloneDeep(newElt));
+      newElt.label = "";
+      newElt.value = '';
       return;
     }
-    array.push(_.cloneDeep(newElt));
+    if (!this.newAdvanceAutre.trim())
+      return;
+    array.push(_.cloneDeep({ label: this.newAdvanceAutre, value: newElt.value }));
     newElt.label = "";
     newElt.value = '';
+    this.newAdvanceAutre = '';
+    return;
   }
   deleteFromArray(array: Array<any>, idx: number) {
     array.splice(idx, 1)
   }
   submit() {
-    if(this.page_idx == 1){
-      if(this.bilanObj.tpe1.value === '' || this.bilanObj.tpe2.value === ''){
-        this.notificationService.showNotification('error','Veillez à remplir toutes les cases !');
+    if (this.page_idx == 1) {
+      if (this.bilanObj.tpe1.value === '' || this.bilanObj.tpe2.value === '') {
+        this.notificationService.showNotification('error', 'Veillez à remplir toutes les cases !');
         return;
       }
     }
-    if(this.page_idx == 2){
-      if(this.bilanObj.website.value === '' || this.bilanObj.totalJusteat.value === ''){
-        this.notificationService.showNotification('error','Veillez à remplir toutes les cases !');
+    if (this.page_idx == 2) {
+      if (this.bilanObj.website.value === '' || this.bilanObj.totalJusteat.value === '') {
+        this.notificationService.showNotification('error', 'Veillez à remplir toutes les cases !');
         return;
       }
     }
-    if(this.page_idx==3)
+    if (this.page_idx == 3)
       this.onSubmit.emit(true)
     this.page_idx += 1;
     this.pageIdx_change.emit(this.page_idx);
