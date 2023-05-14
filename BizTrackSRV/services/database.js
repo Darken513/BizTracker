@@ -66,6 +66,7 @@ exports.createData = async function (db) {
         { username: "Yakoub", password: "2204" },
         { username: "Khalil", password: "2601" },
         { username: "Wael", password: "2906" },
+        { username: "Musli", password: "0306" },
         { username: "Autre", password: "1111" }
     ];
     let restaurants = [

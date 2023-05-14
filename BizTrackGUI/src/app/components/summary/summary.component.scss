@@ -58,6 +58,7 @@
                 width: 15%;
             }
         }
+        
     }
 
     .invoice-icon {
@@ -135,6 +136,35 @@ button.saveconf {
     }
 }
 
+.custom-card .custom-card-body .body-card-inner .banknote-CHFs:not(.registerClass) {
+    table {
+        width: 100%;
+
+        td {
+            overflow-wrap: anywhere;
+        }
+
+        tr th:nth-child(2),
+        tr th:nth-child(3) {
+            text-align: end;
+        }
+
+        tr td:nth-child(1) {
+            width: 25%;
+        }
+
+        tr td:nth-child(2) {
+            width: 37.5%;
+            text-align: end;
+        }
+
+        tr td:nth-child(3) {
+            width: 37.5%;
+            text-align: end;
+        }
+    }
+}
+
 @media print {
     .no-print {
         display: none;
@@ -165,7 +195,6 @@ button.saveconf {
                 margin: 6px !important;
             }
 
-            ;
             width: 100% !important;
         }
 
@@ -177,7 +206,14 @@ button.saveconf {
         padding-top: 10px !important;
     }
 }
-button:disabled{
+
+button:disabled {
     opacity: 0.4;
     background-color: #4c684d;
+}
+
+.totals-wrapper table{
+    tr td:nth-child(3) {
+        text-align: end;
+    }
 }

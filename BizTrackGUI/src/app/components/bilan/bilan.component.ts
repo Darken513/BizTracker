@@ -51,7 +51,7 @@ export class BilanComponent implements OnInit {
   }
   getTotalFromArray(array: Array<any>) {
     return array.reduce(
-      (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
+      (res: any, cur: any) => res + parseFloat(cur.value ? cur.value : '0'),
       0
     );
   }

@@ -7,7 +7,16 @@ const db_utils = require('../services/database')
 exports.createNew = async ({ password, email, address, phone, username}) => {
     let hash = bcrypt.hashSync(password, saltRounds);
     try {
-        return await db_utils.runSync(db, `INSERT INTO USERS (password, email, username, address, phone) VALUES (?, ?, ?, ?, ?)`, [hash, email, username, address, phone]);
+        let user = await db_utils.runSync(db, `INSERT INTO USERS (password, email, username, address, phone) VALUES (?, ?, ?, ?, ?)`, [hash, email, username, address, phone]);
+        let restsIds = await db_utils.getAllSync(db, `SELECT id FROM RESTAURANTS`);
+        for (let idx2 = 0; idx2 < restsIds.length; idx2++) {
+            const restaurantId = restsIds[idx2];
+            try {
+                await db_utils.runSync(db, `INSERT INTO USER_RESTAURANT (userId, restaurantId) VALUES (?, ?)`, [user.id, restaurantId.id]);
+            } catch (err) {
+                console.log(err);
+            }
+        }
     } catch (err) {
         console.log(err)
         return { error: err.message.includes('SQLITE_CONSTRAINT') ? 'User already exists' : 'An error has occurred' };

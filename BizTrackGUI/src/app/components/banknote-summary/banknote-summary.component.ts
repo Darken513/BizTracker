@@ -17,17 +17,17 @@ export class BanknoteSummaryComponent implements OnInit {
 
   getTotalValue() {
     return this.banknotes.reduce((toret: number, curr: Currency) => {
-      toret += curr.value * parseInt(curr.nbr ? curr.nbr : '0');
+      toret += curr.value * parseFloat(curr.nbr ? curr.nbr : '0');
       return toret;
     }, 0)
   }
   reduceCurrency(currency: any) {
-    const currentNbr = parseInt(currency.nbr ? currency.nbr : 0);
+    const currentNbr = parseFloat(currency.nbr ? currency.nbr : 0);
     if (currentNbr > 0)
       currency.nbr = (currentNbr - 1).toString()
   }
   increaseCurrency(currency: any) {
-    const currentNbr = parseInt(currency.nbr ? currency.nbr : 0);
+    const currentNbr = parseFloat(currency.nbr ? currency.nbr : 0);
     currency.nbr = (currentNbr + 1).toString()
   }
   onKeyPress(event: any) {

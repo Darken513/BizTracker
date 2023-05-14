@@ -18,20 +18,17 @@
                     <table style="margin-bottom: 10px;">
                         <tr>
                             <th>Monnaie</th>
-                            <th>Initiale</th>
-                            <th>Gardé</th>
-                            <th>Valeur totale</th>
+                            <th>Valeur Initiale</th>
+                            <th>Valeur Restant</th>
                         </tr>
                         <tr *ngFor="let banknote of banknotesObj;let idx=index;">
                             <td>{{banknote.label}}</td>
-                            <td>{{banknote.nbr?banknote.nbr:'-'}}</td>
-                            <td>{{coinsToLeave[idx]?coinsToLeave[idx]:'-'}}</td>
+                            <td>{{getInitialValue(banknote, idx)}} CHF</td>
                             <td>{{getBanknoteTotal(banknote, idx)}} CHF</td>
                         </tr>
                         <tr style="position:relative; top: 10px;">
                             <td></td>
-                            <td></td>
-                            <td style="font-weight: 600;">Valeur totale</td>
+                            <td style="font-weight: 600;">Totale restant</td>
                             <td style="font-weight: 600;">{{getTotalBanknotes()}} CHF</td>
                         </tr>
                     </table>
@@ -40,7 +37,12 @@
                 <div class="totals-wrapper">
                     <table>
                         <tr>
-                            <td>total du fonds en espéce restant</td>
+                            <td>Totale <strong>Initiale</strong></td>
+                            <td></td>
+                            <td>{{getTotalBanknotesInitial()}} CHF</td>
+                        </tr>
+                        <tr>
+                            <td>Totale <strong>Restant</strong></td>
                             <td></td>
                             <td>{{getTotalBanknotes()}} CHF</td>
                         </tr>
@@ -79,11 +81,11 @@
                             <td>{{nFacture.label}}</td>
                             <td>{{nFacture.value}} CHF</td>
                         </tr>
-                        <tr style="position:relative; top: 10px;">
+                        <!-- <tr style="position:relative; top: 10px;">
                             <td></td>
                             <td style="font-weight: 600;">Revenu total</td>
                             <td style="font-weight: 600;">{{getTotalIncome()}} CHF</td>
-                        </tr>
+                        </tr> -->
                     </table>
                 </div>
             </div>
@@ -91,11 +93,12 @@
             <div class="custom-card-footer no-print">
                 <div class="invoice-icon">
                     <!-- <button class="no-print is-summary" (click)="printPage()">Imprimer le rapport</button> -->
-                    <button [disabled]="!canSubmit" class="no-print is-summary saveconf" (click)="SaveConf()">Valider le rapport</button>
+                    <button [disabled]="!canSubmit" class="no-print is-summary saveconf" (click)="SaveConf()">Valider le
+                        rapport</button>
                 </div>
                 <div class="invoice-details">
-                    <h2><i style="margin-right: 10px;" class="fa fa-money" aria-hidden="true"> </i> TOTAL</h2>
-                    <h1>{{getTotalIncome()}} CHF</h1>
+                    <h2><i style="margin-right: 10px;" class="fa fa-money" aria-hidden="true"> </i> Totale Restant</h2>
+                    <h1>{{getTotalBanknotes()}} CHF</h1>
                 </div>
             </div>
         </div>

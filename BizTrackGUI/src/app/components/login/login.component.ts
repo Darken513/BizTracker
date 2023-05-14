@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const resId:number = params.get('resid')?parseInt(params.get('resid')!):-1;
+      const resId:number = params.get('resid')?parseFloat(params.get('resid')!):-1;
       this.resId = resId;
       if(resId==-1){
         this.notifService.showNotification("Error", "User doesnt exist");

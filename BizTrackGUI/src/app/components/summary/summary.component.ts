@@ -22,7 +22,7 @@ export class SummaryComponent implements OnInit {
   @Input()
   public set bilanObj(v: any) {
     this._bilanObj = v;
-    this.fields = [v.website, v.tpe1, v.tpe2];
+    this.fields = [v.website, v.totalJusteat, v.tpe1, v.tpe2];
   }
   public get bilanObj(): any {
     return this._bilanObj;
@@ -57,26 +57,34 @@ export class SummaryComponent implements OnInit {
     return this.banknotesObj.reduce(
       (res: number, cur: any, idx: number) =>
         res +
-        parseInt(cur.value ? cur.value : '0') *
-        (parseInt(cur.nbr ? cur.nbr : '0') - this.coinsToLeave[idx]),
+        parseFloat(cur.value ? cur.value : '0') *
+        (parseFloat(cur.nbr ? cur.nbr : '0') - this.coinsToLeave[idx]),
+      0
+    ).toFixed(2);
+  }
+  getTotalBanknotesInitial(){
+    return this.banknotesObj.reduce(
+      (res: number, cur: any, idx: number) =>
+        res +
+        parseFloat(cur.value ? cur.value : '0') * parseFloat(cur.nbr ? cur.nbr : '0'),
       0
     ).toFixed(2);
   }
   getTotalCharges() {
     return this.bilanObj.charges.reduce(
-      (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
+      (res: any, cur: any) => res + parseFloat(cur.value ? cur.value : '0'),
       0
     ).toFixed(2);
   }
   getTotalAdvances() {
     return this.bilanObj.advances.reduce(
-      (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
+      (res: any, cur: any) => res + parseFloat(cur.value ? cur.value : '0'),
       0
     ).toFixed(2);
   }
   getTotalNonFactures() {
     return this.bilanObj.nonFactures.reduce(
-      (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
+      (res: any, cur: any) => res + parseFloat(cur.value ? cur.value : '0'),
       0
     ).toFixed(2);
   }
@@ -84,7 +92,7 @@ export class SummaryComponent implements OnInit {
     return (
       parseFloat(this.getTotalBanknotes()) +
       this.fields.reduce(
-        (res: any, cur: any) => res + parseInt(cur.value ? cur.value : '0'),
+        (res: any, cur: any) => res + parseFloat(cur.value ? cur.value : '0'),
         0
       ) - parseFloat(this.getTotalCharges()) - parseFloat(this.getTotalAdvances()) - parseFloat(this.getTotalNonFactures())
     );
@@ -98,10 +106,8 @@ export class SummaryComponent implements OnInit {
       const banknote = this.banknotesObj[idx];
       let topush = {
         value: banknote.value,
-        initial: banknote.nbr,
-        kept: this.coinsToLeave[idx],
-        finalValue: banknote.value *
-          (parseInt(banknote.nbr ? banknote.nbr : '0') - this.coinsToLeave[idx])
+        initialVal: (banknote.value * parseFloat(banknote.nbr ? banknote.nbr : '0')),
+        finalVal: banknote.value * (parseFloat(banknote.nbr ? banknote.nbr : '0') - this.coinsToLeave[idx])
       }
       toret.push(topush)
     }
@@ -113,8 +119,10 @@ export class SummaryComponent implements OnInit {
       username: this.username,
       dateTime: this.dateTime,
       banknotesDetails: this.getBanknotesDetails(), //[{ value: '', initial: '', kept: '', finalValue: '' }]
-      totalBanknotesVal: this.getTotalBanknotes(),
+      totalInitialBanknotesVal: this.getTotalBanknotesInitial(),
+      totalLeftBanknotesVal: this.getTotalBanknotes(),
       websiteTotal: this.fields.find((col) => col.fieldName == "totalWebsite")?.value,
+      totalJusteat: this.fields.find((col) => col.fieldName == "totalJusteat")?.value,
       tpe1Total: this.fields.find((col) => col.fieldName == "totalTpe1")?.value,
       tpe2Total: this.fields.find((col) => col.fieldName == "totalTpe2")?.value,
       chargesTotal: this.getTotalCharges(),
@@ -147,7 +155,12 @@ export class SummaryComponent implements OnInit {
   getBanknoteTotal(banknote: any, idx: number) {
     return (
       banknote.value *
-      (parseInt(banknote.nbr ? banknote.nbr : '0') - this.coinsToLeave[idx])
+      (parseFloat(banknote.nbr ? banknote.nbr : '0') - this.coinsToLeave[idx])
+    ).toFixed(2);
+  }
+  getInitialValue(banknote: any, idx: number) {
+    return (
+      banknote.value * parseFloat(banknote.nbr ? banknote.nbr : '0')
     ).toFixed(2);
   }
   onKeyPress(event: any) {

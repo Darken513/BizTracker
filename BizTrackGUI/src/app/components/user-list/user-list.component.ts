@@ -21,7 +21,7 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const resId:number = params.get('id')?parseInt(params.get('id')!):-1;
+      const resId:number = params.get('id')?parseFloat(params.get('id')!):-1;
       this.resId = resId;
       if(resId==-1){
         this.notifService.showNotification("Error", "User doesnt exist");
