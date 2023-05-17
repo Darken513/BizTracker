@@ -22,7 +22,9 @@ app.use('/restaurant', restaurantRouter);
 app.use('/employee', employeesRouter);
 app.use('/banknotesummary', banknotesummaryRouter);
 app.use('/charges', chargesRouter);
-
+app.use((req, res) => {
+  res.redirect('/');
+});
 async function init() {
   await db_utils.initDataBase(db);
   //await db_utils.createData(db)
