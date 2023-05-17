@@ -51,7 +51,7 @@ export class SummaryComponent implements OnInit {
     this.restaurant = this.authService.getCurrentUser().restaurant;
   }
   getTotalFieldVal(total: any) {
-    return total.toFixed(2)
+    return total ? total.toFixed(2) : "0"
   }
   getTotalBanknotes() {
     return this.banknotesObj.reduce(
@@ -69,6 +69,9 @@ export class SummaryComponent implements OnInit {
         parseFloat(cur.value ? cur.value : '0') * parseFloat(cur.nbr ? cur.nbr : '0'),
       0
     ).toFixed(2);
+  }
+  getTotalFondDeCaisse(){
+    return (parseFloat(this.getTotalBanknotesInitial()) - parseFloat(this.getTotalBanknotes())).toFixed(2)
   }
   getTotalCharges() {
     return this.bilanObj.charges.reduce(
@@ -106,6 +109,7 @@ export class SummaryComponent implements OnInit {
       const banknote = this.banknotesObj[idx];
       let topush = {
         value: banknote.value,
+        nbr:banknote.nbr ? banknote.nbr : "0",
         initialVal: (banknote.value * parseFloat(banknote.nbr ? banknote.nbr : '0')),
         finalVal: banknote.value * (parseFloat(banknote.nbr ? banknote.nbr : '0') - this.coinsToLeave[idx])
       }
@@ -121,6 +125,7 @@ export class SummaryComponent implements OnInit {
       banknotesDetails: this.getBanknotesDetails(), //[{ value: '', initial: '', kept: '', finalValue: '' }]
       totalInitialBanknotesVal: this.getTotalBanknotesInitial(),
       totalLeftBanknotesVal: this.getTotalBanknotes(),
+      totalFondDeCaisse: this.getTotalFondDeCaisse(),
       websiteTotal: this.fields.find((col) => col.fieldName == "totalWebsite")?.value,
       totalJusteat: this.fields.find((col) => col.fieldName == "totalJusteat")?.value,
       tpe1Total: this.fields.find((col) => col.fieldName == "totalTpe1")?.value,

@@ -9,8 +9,8 @@ import { FieldToFill } from 'src/app/Models/FieldToFill';
   styleUrls: ['./bilan-wrapper.component.scss']
 })
 export class BilanWrapperComponent implements OnInit {
-  page_idx:number = 0
-  coinsToLeave:Array<number>=[]
+  page_idx: number = 0
+  coinsToLeave: Array<number> = []
   banknotes: Array<Currency> = [
     new Currency('../../assets/005CHF.png', '0.05 CHF', 0.05, ''),
     new Currency('../../assets/010CHF.jpg', '0.10 CHF', 0.1, ''),
@@ -35,14 +35,14 @@ export class BilanWrapperComponent implements OnInit {
     charges: []
   };
 
-  constructor(private route:Router) { }
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
   }
-  onPageIdxChange(event:any){
+  onPageIdxChange(event: any) {
     this.page_idx = event;
   }
-  logout(){
+  logout() {
     localStorage.clear();
     this.route.navigate(["/home"])
   }
