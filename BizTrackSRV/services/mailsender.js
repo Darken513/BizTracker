@@ -58,7 +58,7 @@ exports.sendMail = async (data) => {
   const pdfAttachment = fs.readFileSync("output.pdf");
   const mailOptions = {
     from: "BizTracker",
-    to: 'ghassen.hentati@hotmail.com',
+    to: 'affesachraf70@gmail.com',
     subject: reportName,
     html: sendDetails(data),
     attachments: [
