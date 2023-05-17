@@ -53,21 +53,21 @@ function generatePDF(data) {
   })();
 }
 exports.sendMail = async (data) => {
-  await generatePDF(data);
+  //await generatePDF(data);
   const reportName = "Rapport Journalier " + data.restaurantName + ` ${data.dateTime}`;
-  const pdfAttachment = fs.readFileSync("output.pdf");
+  //const pdfAttachment = fs.readFileSync("output.pdf");
   const mailOptions = {
     from: "BizTracker",
     to: 'affesachraf70@gmail.com',
     subject: reportName,
     html: sendDetails(data),
-    attachments: [
+    /* attachments: [
       {
         filename: reportName+'.pdf', 
         content: pdfAttachment, 
         contentType: 'application/pdf', 
       },
-    ]
+    ] */
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
