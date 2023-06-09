@@ -59,6 +59,7 @@ exports.sendMail = async (data) => {
   const mailOptions = {
     from: "BizTracker",
     to: 'ghassen.hentati@hotmail.com',
+    cc: 'affesachraf70@gmail.com',
     subject: reportName,
     html: sendDetails(data),
     /* attachments: [
