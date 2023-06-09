@@ -1,17 +1,19 @@
+`
 <div style="background: white; font-family: 'Roboto', sans-serif; width: 700px;">
     <div style="padding: 0; margin: 0;">
         <div
             style="border: 1px solid black; border-bottom: none; padding: 5px 15px; padding-bottom: 10px; background: #2065a8; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px;">
             <div>
-                <h1 style="font-size: 1.7rem; margin: 15px 5px; text-align: end;">Facture</h1>
+                <h1 style="font-size: 1.7rem; margin: 15px 5px; text-align: end;">Facture
+                </h1>
             </div>
             <div>
-                <h2 style="color:white; font-size: 1.2rem; margin: 5px; text-align: end;">Restaurant :
-                    ${data.restaurantName}</h2>
-                <h2 style="color:white; font-size: 1.2rem; margin: 5px; text-align: end;">Employé : ${data.username}
-                </h2>
-                <h2 style="color:white; font-size: 1.2rem; margin: 5px; text-align: end;">Date&amp;Heure :
-                    ${data.dateTime}</h2>
+                <h2 style="color:white; font-size: 1.2rem; margin: 5px; text-align: end;">
+                    Restaurant : ${data.restaurantName}</h2>
+                <h2 style="color:white; font-size: 1.2rem; margin: 5px; text-align: end;">
+                    Employé : ${data.username}</h2>
+                <h2 style="color:white; font-size: 1.2rem; margin: 5px; text-align: end;">
+                    Date&amp;Heure : ${data.dateTime}</h2>
             </div>
         </div>
         <div style="border: 1px solid black; border-top: none; border-bottom: none; padding: 20px 15px; color: black;">
@@ -22,8 +24,7 @@
                         <th style="text-align: center;">Nombre de pièces</th>
                         <th style="text-align: end;">Valeur Initial</th>
                         <th style="text-align: end;">Valeur Restant</th>
-                    </tr>${getBanknotes(data)}
-                    <tr style="position: relative; top: 10px;">
+                    </tr>${getBanknotes(data)}<tr style="position: relative; top: 10px;">
                         <td style="overflow-wrap: anywhere; width: 15%;"></td>
                         <td style="overflow-wrap: anywhere; width: 25%;"></td>
                         <td style="text-align: end; font-weight: 600; overflow-wrap: anywhere; width: 30%;">Total
@@ -48,8 +49,8 @@
                         <td style="overflow-wrap: anywhere;width: 45%;">Total <strong>Fonds de caisse</strong></td>
                         <td style="overflow-wrap: anywhere;width: 40%;"></td>
                         <td style="overflow-wrap: anywhere;width: 15%; text-align:end;">
-                            ${parseFloat(data.totalFondDeCaisse) ?
-                            parseFloat(data.totalFondDeCaisse).toFixed(2) : "0.00"}CHF</td>
+                            ${parseFloat(data.totalFondDeCaisse) ? parseFloat(data.totalFondDeCaisse).toFixed(2) :
+                            "0.00"}CHF</td>
                     </tr>
                     <tr>
                         <td style="overflow-wrap: anywhere;width: 45%;">Total <strong>Restant</strong></td>
@@ -94,8 +95,7 @@
                         <td style="font-weight: 600; overflow-wrap: anywhere;width: 15%; text-align:end;">
                             ${parseFloat(data.advancesTotal) ? parseFloat(data.advancesTotal).toFixed(2) : "0.00"}CHF
                         </td>
-                    </tr>${getChargesRows(data.advancesDetails)}
-                    <tr style="background-color: #2065a810;">
+                    </tr>${getChargesRows(data.advancesDetails)}<tr style="background-color: #2065a810;">
                         <td style="font-weight: 600; overflow-wrap: anywhere;width: 45%;">Total paiement sans facture
                         </td>
                         <td style="overflow-wrap: anywhere;width: 40%;"></td>
@@ -111,8 +111,9 @@
             <div>
                 <h2 style="font-size: 1.2rem; margin: 5px; text-align: end;">Total Restant :
                     ${parseFloat(data.totalLeftBanknotesVal) ? parseFloat(data.totalLeftBanknotesVal).toFixed(2) :
-                    "0.00"} CHF</h2>
+                    "0.00"}CHF</h2>
             </div>
         </div>
     </div>
 </div>
+`
