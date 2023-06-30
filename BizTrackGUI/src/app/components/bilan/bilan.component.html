@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="page_idx==2" class="custom-card cardBoxWrapper">
+    <div *ngIf="page_idx==2" class="custom-card cardBoxWrapper secondPage">
         <div class="custom-card-body">
             <h1 class="mainTitle">Commande en ligne en espéce</h1>
             <div class="body-card-inner">
@@ -26,6 +26,11 @@
                 <h1>{{bilanObj.totalJusteat.label}}</h1>
                 <input type="number" min="0" placeholder="0" name="{{bilanObj.totalJusteat.fieldName}}"
                     (keypress)="onKeyPress($event)" [(ngModel)]="bilanObj.totalJusteat.value">
+            </div>
+            <div class="body-card-inner">
+                <h1>{{bilanObj.CAtotalDeCaisse.label}}</h1>
+                <input type="number" min="0" placeholder="0" name="{{bilanObj.CAtotalDeCaisse.fieldName}}"
+                    (keypress)="onKeyPress($event)" [(ngModel)]="bilanObj.CAtotalDeCaisse.value">
             </div>
         </div>
     </div>

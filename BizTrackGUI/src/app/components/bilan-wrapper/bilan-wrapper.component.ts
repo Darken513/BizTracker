@@ -28,6 +28,7 @@ export class BilanWrapperComponent implements OnInit {
   bilanObj: any = {
     website: new FieldToFill('totalWebsite', "Total site internet", ''),
     totalJusteat: new FieldToFill('totalJusteat', "Total Justeat en espèce", ''),
+    CAtotalDeCaisse: new FieldToFill('CAtotalDeCaisse', "CA total de la caisse", ''),
     tpe1: new FieldToFill('totalTpe1', "Total TPE1", ''),
     tpe2: new FieldToFill('totalTpe2', "Total TPE2", ''),
     nonFactures: [],

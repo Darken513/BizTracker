@@ -22,7 +22,7 @@ export class SummaryComponent implements OnInit {
   @Input()
   public set bilanObj(v: any) {
     this._bilanObj = v;
-    this.fields = [v.website, v.totalJusteat, v.tpe1, v.tpe2];
+    this.fields = [v.website, v.totalJusteat, v.CAtotalDeCaisse, v.tpe1, v.tpe2];
   }
   public get bilanObj(): any {
     return this._bilanObj;
@@ -128,6 +128,7 @@ export class SummaryComponent implements OnInit {
       totalFondDeCaisse: this.getTotalFondDeCaisse(),
       websiteTotal: this.fields.find((col) => col.fieldName == "totalWebsite")?.value,
       totalJusteat: this.fields.find((col) => col.fieldName == "totalJusteat")?.value,
+      CAtotalDeCaisse: this.fields.find((col) => col.fieldName == "CAtotalDeCaisse")?.value,
       tpe1Total: this.fields.find((col) => col.fieldName == "totalTpe1")?.value,
       tpe2Total: this.fields.find((col) => col.fieldName == "totalTpe2")?.value,
       chargesTotal: this.getTotalCharges(),

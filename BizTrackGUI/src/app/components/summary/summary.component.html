@@ -49,11 +49,6 @@
                             <td></td>
                             <td>{{getTotalFondDeCaisse()}} CHF</td>
                         </tr>
-                        <tr>
-                            <td>Total <strong>Restant</strong></td>
-                            <td></td>
-                            <td>{{getTotalBanknotes()}} CHF</td>
-                        </tr>
                         <tr *ngFor="let total of fields">
                             <td>{{total.label}}</td>
                             <td></td>
@@ -99,15 +94,15 @@
             </div>
 
             <div class="custom-card-footer no-print">
-                <div class="invoice-icon">
+                <div class="invoice-icon" style="width: 100%;">
                     <!-- <button class="no-print is-summary" (click)="printPage()">Imprimer le rapport</button> -->
-                    <button [disabled]="!canSubmit" class="no-print is-summary saveconf" (click)="SaveConf()">Valider le
+                    <button style="display: block; margin: auto;" [disabled]="!canSubmit" class="no-print is-summary saveconf" (click)="SaveConf()">Valider le
                         rapport</button>
                 </div>
-                <div class="invoice-details">
+                <!-- <div class="invoice-details">
                     <h2><i style="margin-right: 10px;" class="fa fa-money" aria-hidden="true"> </i> Total Restant</h2>
                     <h1>{{getTotalBanknotes()}} CHF</h1>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

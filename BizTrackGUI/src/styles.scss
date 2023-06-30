@@ -198,6 +198,9 @@ body {
         height: 240px !important;
     }
 
+    .custom-card.cardBoxWrapper.secondPage:not(.multi) {
+        height: 350px !important;
+    }
     .custom-card:not(.cardBoxWrapper) {
         .currencuDetails {
             width: calc(100% - 70px) !important;
